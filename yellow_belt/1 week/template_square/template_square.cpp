@@ -1,68 +1,97 @@
-#include <iostream>
-#include <cstdint>
-#include <limits>
-#include <tuple>
-#include <map>
-#include <vector>
-#include <utility>
-#include <exception>
 /*
-Реализуйте шаблонную функцию Sqr, которая работает не только для чисел, но и для контейнеров. Функция должна возвращать копию исходного контейнера, модифицировав его следующим образом:
-для vector элементы нужно возвести в квадрат;
-для map в квадрат нужно возвести только значения, но не ключи;
-для pair в квадрат нужно возвести каждый элемент пары.
+
+Implement the template function Sqr, which works not only for numbers but also for containers. The function should return a copy of the original container, modified as follows:
+
+For vectors, the elements should be squared.
+For maps, only the values should be squared, not the keys.
+For pairs, each element of the pair should be squared.
+The function should work correctly not only for containers consisting of numbers but also for composite objects, for example, vectors of maps of pairs of numbers.
+
+
+
 */
 
 
+
+#include <iostream>
+#include <map>
+#include <vector>
+#include <utility>
+
 using namespace std;
+//-------------------------------------------------------------------------------------------------
+template<typename T>
+T Sqr(T x);
 
-template<typename T> T Sqr(T x);
-template<typename T> vector<T> Sqr(const vector<T>& vec);
-template<typename T> vector<T> Sqr(const vector<T>& vec);
-template<typename First, typename Second> pair<First,Second> Sqr(const pair<First,Second>& p);
-template<typename Key, typename Value> map<Key,Value> Sqr(const map<Key,Value>& m);
+template<typename T>
+vector<T> Sqr(const vector<T>& v);
 
-/* Basic function */
+template<typename key, typename value>
+map<key, value> Sqr(const map<key, value>& m);
+
+template<typename first, typename second>
+pair<first, second> Sqr(const pair<first, second>& p);
+//-------------------------------------------------------------------------------------------------
+
+
 template<typename T>
 T Sqr(T x){
     return x * x;
 }
 
-/* Vectors Sqr*/
+//-------------------------------------------------------------------------------------------------
 template<typename T>
-vector<T> Sqr(const vector<T>& vec){
-    vector<T> result;
-    for(T elem:vec){
-        result.push_back(Sqr(elem));
+vector<T> Sqr(const vector<T>& v){
+    vector<T> temp;
+    for(int i = 0; i < v.size(); ++i){
+        temp.push_back(Sqr(v[i]));
     }
-    return result;
+    return temp;
 }
 
-template <typename First,typename Second>
-pair<First,Second> Sqr(const pair<First,Second>& p){
-    return make_pair(Sqr(p.first),Sqr(p.second));
-}
-
-
-
-template <typename Key,typename Value>
-map<Key,Value> Sqr(map<Key,Value>& m){
-    map<Key,Value> res;
-    for(auto elem:m){
-        res[elem.first] = Sqr(elem.second);
+//-------------------------------------------------------------------------------------------------
+template<typename key, typename value>
+map<key, value> Sqr(const map<key, value>& m){
+   map<key, value> temp;
+    for(auto const elem: m){
+        temp[elem.first] = Sqr(elem.second);
     }
-    return res;
+    return temp;
 }
 
-int main(){
-map<int, pair<int, int>> map_of_pairs = {
-  {4, {2, 2}},
-  {7, {4, 3}}
-};
-cout << "map of pairs:" << endl;
-for (const auto& x : Sqr(map_of_pairs)) {
-  cout << x.first << ' ' << x.second.first << ' ' << x.second.second << endl;
+//-------------------------------------------------------------------------------------------------
+
+template<typename first, typename second>
+pair<first, second> Sqr(const pair<first, second>& p){
+    return {Sqr(p.first), Sqr(p.second)};
 }
 
+//-------------------------------------------------------------------------------------------------
+
+
+int main()
+{
+    // Пример вызова функции
+    vector<int> v = { 1, 2, 3 };
+   
+    cout << "vector:";
+   
+    for (int x : Sqr(v))
+    {
+        cout << ' ' << x;
+    }
+    cout << endl;
+
+    map<int, pair<int, int>> map_of_pairs =
+    {
+      {4, {2, 2}},
+      {7, {4, 3}}
+    };
+    cout << "map of pairs:" << endl;
+
+    for (const auto& x : Sqr(map_of_pairs))
+    {
+        cout << x.first << ' ' << x.second.first << ' ' << x.second.second << endl;
+    }
     return 0;
 }
