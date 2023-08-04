@@ -7,8 +7,6 @@ For maps, only the values should be squared, not the keys.
 For pairs, each element of the pair should be squared.
 The function should work correctly not only for containers consisting of numbers but also for composite objects, for example, vectors of maps of pairs of numbers.
 
-
-
 */
 
 
