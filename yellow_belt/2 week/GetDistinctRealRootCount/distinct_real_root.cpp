@@ -1,7 +1,7 @@
 /*
-возвращает количество уникальных действительных корней уравнения ax² + bx + c = 0. Разработайте набор юнит-тестов для проверки корректности реализации этой функции. 
-Случай, когда все три коэффициента равны нулю, тестировать не надо.
-Начать работу вы можете с шаблона, который содержит наш фреймворк юнит-тест и заготовку функции GetDistinctRealRootCount.
+Returns the number of distinct real roots of the equation ax² + bx + c = 0. Develop a set of unit tests to verify the correctness of the implementation of this function.
+There is no need to test the case when all three coefficients are equal to zero.
+You can start with a template that includes our unit test framework and a placeholder for the function GetDistinctRealRootCount.
 */
 
 #include <iostream>
@@ -106,17 +106,14 @@ private:
 
 
 int GetDistinctRealRootCount(double a, double b, double c){
-  // найдём дискриминант
     double D = b * b - 4 * a * c;
 
 
     
-    if(D == 0) {  // случай с нулевым дискриминантом
-    
-    // корень ровно один
+    if(D == 0) { 
     return 1;
     
-    } else if (D > 0) {  // в случае с положительным дискриминантом корня два
+    } else if (D > 0) { 
         return 2;
     }
         return 0;
