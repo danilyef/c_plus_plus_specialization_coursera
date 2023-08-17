@@ -11,13 +11,13 @@
 using namespace std;
 
 /*
-Список требований, предъявляемых к реализации интерфейса класса Rational:
-Конструктор по умолчанию должен создавать дробь с числителем 0 и знаменателем 1.
-При конструировании объекта класса Rational с параметрами p и q должно выполняться сокращение дроби p/q.
-Если дробь p/q отрицательная, то объект Rational(p, q) должен иметь отрицательный числитель и положительный знаменатель.
-Если дробь p/q положительная, то объект Rational(p, q) должен иметь положительные числитель и знаменатель (обратите внимание на случай Rational(-2, -3)).
-Если числитель дроби равен нулю, то знаменатель должен быть равен 1.
-Разработайте набор юнит-тестов, которые будут проверять корректность реализации класса Rational. Тестировать случай, когда знаменатель равен нулю, не надо.
+List of requirements for implementing the interface of the Rational class:
+1. The default constructor should create a fraction with a numerator of 0 and a denominator of 1.
+2. When constructing an object of the Rational class with parameters p and q, the fraction p/q should be reduced.
+3. If the fraction p/q is negative, then the Rational(p, q) object should have a negative numerator and a positive denominator.
+4. If the fraction p/q is positive, then the Rational(p, q) object should have positive numerator and denominator (note the case Rational(-2, -3)).
+5. If the numerator of the fraction is zero, then the denominator should be 1.
+Develop a set of unit tests to verify the correctness of the implementation of the Rational class. There is no need to test the case when the denominator is zero.
 */
 
 class Rational {
