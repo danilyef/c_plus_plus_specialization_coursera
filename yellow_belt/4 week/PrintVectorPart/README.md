@@ -17,5 +17,3 @@ int main() {
 }
 
 ```
-
-Upload the *rectangle.h* header file containing the *Rectangle* class declaration. It should be a complete header file that can be used in a large project. In particular, the problem of double inclusion should be solved in it.
