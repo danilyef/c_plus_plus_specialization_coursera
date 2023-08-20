@@ -1,65 +1,57 @@
-#include <string>
-#include <sstream> 
-#include <iostream>
 #include "phone_number.h"
-
+#include <iostream>
+#include <vector>
+#include <sstream>
 using namespace std;
 
 
+
+
 PhoneNumber::PhoneNumber(const string &international_number){
-    if(international_number[0]  != '+'){
-        throw invalid_argument("Phone number must start from +!");
-    } else if(count(international_number.begin(),international_number.end(),'-') !=2){
-        throw invalid_argument("Phone number contain two  '-' signs: + country_code - city_code - personal_number");
+    if(international_number[0] != '+'){
+        throw invalid_argument("Number must start with +");
     }
+
+    istringstream is(international_number);
+    char delim = '-';
     
-    stringstream stream(international_number);
-    const char sign = stream.get();
+    char plus = is.get();
+    getline(is,country_code_,delim);
+    getline(is,city_code_,delim);
+    getline(is,local_number_);
 
-    getline(stream, country_code_, '-');
-    getline(stream, city_code_, '-');
-    getline(stream, local_number_, '\n');
+    if(country_code_.empty() || city_code_.empty() || local_number_.empty()){
+        throw invalid_argument("Phone must include: country code, city code, local number! ");
+    }
 
-	if (sign != '+' || country_code_.empty())
-	{
-		throw invalid_argument("The country code must begin with a + sign and be at least one character");
-	}
 
-	if (city_code_.empty())
-	{
-		throw invalid_argument("Area code cannot be empty");
-	}
-
-	if (local_number_.empty())
-	{
-		throw invalid_argument("Phone number cannot be empty");
-	}
-    
-}
-
+};
 
 string PhoneNumber::GetCountryCode() const{
     return country_code_;
-}
+};
 string PhoneNumber::GetCityCode() const{
     return city_code_;
-}
-string PhoneNumber::GetLocalNumber() const {
+};
+string PhoneNumber::GetLocalNumber() const{
     return local_number_;
-}
+};
 string PhoneNumber::GetInternationalNumber() const{
     return "+" + country_code_ + "-" + city_code_ + "-" + local_number_;
-}
+};
 
 
-
-ostream& operator<<(ostream& stream, const PhoneNumber& pn){
-    stream << "+" + pn.GetCountryCode() + "-" + pn.GetCityCode() + "-" + pn.GetLocalNumber();
-    return stream;
-}
 
 int main(){
-
-    PhoneNumber pn("+12-333");
-    cout << pn;
+    string s;
+    cin >> s;
+    PhoneNumber num(s);
+    string country_code = num.GetCountryCode();
+    string city_code = num.GetCityCode();
+    string local_code = num.GetLocalNumber();
+    string int_code = num.GetInternationalNumber();
+    cout << country_code << endl;
+    cout << city_code << endl;
+    cout << local_code << endl;
+    cout << int_code << endl;
 }

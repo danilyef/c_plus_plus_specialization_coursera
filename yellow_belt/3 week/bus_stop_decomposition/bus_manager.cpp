@@ -1,64 +1,43 @@
-#include <string>
-#include <iostream>
-#include <cassert>
-#include <vector>
-#include <map>
-#include <sstream> 
-#include <exception>
-#include <typeinfo>
+
 #include "bus_manager.h"
-#include "response.h"
 using namespace std;
 
 
 void BusManager::AddBus(const string& bus, const vector<string>& stops) {
-    if(buses_to_stops.count(bus) > 0){
-        cout << "This bus already exists" << endl;
+    for (string stop : stops) {
+      stops_to_buses[stop].push_back(bus);
+    }
+    buses_to_stops[bus] = stops;
+  }
+
+  BusesForStopResponse BusManager::GetBusesForStop(const string& stop) const {
+    BusesForStopResponse stop_for_buses;
+    
+    if(stops_to_buses.count(stop) == 0){
+        vector<string> v;
+        stop_for_buses = {v};
     } else{
-        buses_to_stops[bus] = stops;
-        for(const auto& stop:stops){
-            stops_to_buses[stop].push_back(bus);
-        }
+       stop_for_buses = {stops_to_buses.at(stop)};
     }
-}
+    
+    return stop_for_buses;
+  }
 
-BusesForStopResponse BusManager::GetBusesForStop(const string& stop) const {
-    vector<string> buses;
-    if(stops_to_buses.count(stop) > 0){
-        buses =  stops_to_buses.at(stop);
-    } 
-    BusesForStopResponse stop_buses = {stop, buses};
-    return stop_buses;
-}
+  StopsForBusResponse BusManager::GetStopsForBus(const string& bus) const {
+    StopsForBusResponse  bus_to_stops;
 
-StopsForBusResponse BusManager::GetStopsForBus(const string& bus) const {
-        
-    vector<string> stops;
-    map<string, vector<string>> stop_bus;
-
-
-    if(buses_to_stops.count(bus) > 0){
-        stops =  buses_to_stops.at(bus);
+    if(buses_to_stops.count(bus) == 0){
+        vector<string> v;
+        bus_to_stops = {bus,v,stops_to_buses};
+    } else{
+       bus_to_stops = {bus,buses_to_stops.at(bus),stops_to_buses};
     }
+    
+    return bus_to_stops;
 
-    for(auto stop : stops){
-        vector<string> buses;
-        for(const auto& b:stops_to_buses.at(stop)){
-            if(b != bus){
-                buses.push_back(b);
-            }
-        }
-        stop_bus[stop] = buses;
-    }
-    StopsForBusResponse stops_bus = {bus,stop_bus};
-    return stops_bus;
-}
+  }
 
-
-AllBusesResponse BusManager::GetAllBuses() const {
-    AllBusesResponse buses_stop = {buses_to_stops};
-    return buses_stop;
-}
-
-
-
+  AllBusesResponse BusManager::GetAllBuses() const {
+    AllBusesResponse all_buses = {buses_to_stops};
+    return all_buses;
+  }
