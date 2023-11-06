@@ -1,27 +1,28 @@
 /*
-Notification Sending
-In this task, you need to develop classes SmsNotifier and EmailNotifier that send notifications as SMS and email, respectively, as well as an abstract base class for them.
+You are given the main function, which reads commands from the standard input to work with a set of geometric shapes:
 
-You are given the functions SendSms and SendEmail, which simulate sending SMS and email.
+As seen in the code, there are two types of commands:
 
-void SendSms(const string& number, const string& message);
-void SendEmail(const string& email, the string& message);
+ADD — add a shape to the set;
+PRINT — for each shape in the set, print the name, perimeter, and area.
 
-Develop:
+The program supports three types of shapes: rectangle, triangle, and circle. Their addition is described as follows:
 
-1. An abstract base class INotifier with one purely virtual method void Notify(const string& message).
+ADD RECT width height — add a rectangle with dimensions width and height (for example, ADD RECT 2 3).
 
-2. The SmsNotifier class, which:
+ADD TRIANGLE a b c — add a triangle with sides a, b, and c (for example, ADD TRIANGLE 3 4 5).
 
-   - is a subclass of the INotifier class.
-   - accepts one parameter of type string in its constructor, which is the phone number.
-   - overrides the Notify method and calls the SendSms function from within it.
+ADD CIRCLE r — add a circle with radius r (for example, ADD CIRCLE 5).
 
-3. The EmailNotifier class, which:
+Without changing the main function, implement the missing functions and classes:
 
-   - is a subclass of the INotifier class.
-   - accepts one parameter of type string in its constructor, which is the email address.
-   - overrides the Notify method and calls the SendEmail function from within it.
+A base class Figure with pure virtual methods Name, Perimeter, and Area;
+Classes Triangle, Rect, and Circle, which inherit from the Figure class and override its virtual methods;
+A function CreateFigure that, depending on the input stream's content, creates shared_ptr<Rect>, shared_ptr<Triangle>, or shared_ptr<Circle>.
+
+It is guaranteed that all ADD commands are correct; the dimensions of all shapes are natural numbers not exceeding 1000. Use the value of π as 3.14.
+
+
 
 */
 
