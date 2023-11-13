@@ -1,92 +1,141 @@
-/*
-You are given the main function, which reads commands from the standard input to work with a set of geometric shapes:
-
-As seen in the code, there are two types of commands:
-
-ADD — add a shape to the set;
-PRINT — for each shape in the set, print the name, perimeter, and area.
-
-The program supports three types of shapes: rectangle, triangle, and circle. Their addition is described as follows:
-
-ADD RECT width height — add a rectangle with dimensions width and height (for example, ADD RECT 2 3).
-
-ADD TRIANGLE a b c — add a triangle with sides a, b, and c (for example, ADD TRIANGLE 3 4 5).
-
-ADD CIRCLE r — add a circle with radius r (for example, ADD CIRCLE 5).
-
-Without changing the main function, implement the missing functions and classes:
-
-A base class Figure with pure virtual methods Name, Perimeter, and Area;
-Classes Triangle, Rect, and Circle, which inherit from the Figure class and override its virtual methods;
-A function CreateFigure that, depending on the input stream's content, creates shared_ptr<Rect>, shared_ptr<Triangle>, or shared_ptr<Circle>.
-
-It is guaranteed that all ADD commands are correct; the dimensions of all shapes are natural numbers not exceeding 1000. Use the value of π as 3.14.
-
-
-
-*/
-
-
 #include <iostream>
 #include <string>
+#include <cmath>
+#include <iomanip>
+#include <sstream>
+#include <stdexcept>
+#include <memory>
+#include <vector>
 
 using namespace std;
 
-void SendSms(const string& number, const string& message) {
-    cout << "Send '" << message << "' to number " << number << endl;
-}
 
-void SendEmail(const string& email, const string& message) {
-    cout << "Send '" << message << "' to e-mail "  << email << endl;
-}
-
-/*
- Реализуйте здесь классы INotifier, SmsNotifier, EmailNotifier
- */
-
-class INotifier {
+class Figure{
 public:
-    virtual void Notify(const string& message) const = 0;
-
-};
-
-
-class SmsNotifier : public INotifier {
-public:
-    SmsNotifier(const string& phone_num) : phone_num_(phone_num) {}
-
-    void Notify(const string& message) const override{
-        SendSms(phone_num_,message);
-    }
+    virtual string Name() const = 0;
+    virtual double Perimeter() const = 0;
+    virtual double Area() const = 0;
 
 private:
-    const string phone_num_;
+    const string type_ = "figure";
+
 };
 
-class EmailNotifier : public INotifier {
-public:
-    EmailNotifier(const string& email_adr) : email_adr_(email_adr) {}
 
-    void Notify(const string& message) const override{
-        SendEmail(email_adr_,message);
-    }
+class Rect : public Figure {
+public:
+    Rect(const int& width, const int& height) : width_(width), height_(height) {}
+
+    string Name() const override{
+        return type_;
+    };
+
+    double Perimeter() const override{
+        return 2 * width_ + 2 * height_;
+    };
+
+    double Area() const override{
+        return width_ * height_;
+    };
 
 private:
-    const string email_adr_;
+    const double width_;
+    const double height_;
+    const string type_ = "RECT";
 };
 
 
+class Triangle : public Figure {
+public:
+    Triangle(const int& a, const int& b,  const int& c ) : a_(a), b_(b), c_(c) {}
 
-void Notify(INotifier& notifier, const string& message) {
-    notifier.Notify(message);
-}
+    string Name() const override{
+        return type_;
+    };
+
+    double Perimeter() const override{
+        return a_ + b_ + c_;
+    };
+
+    double Area() const override{
+        double s = (a_ + b_ + c_)/2;
+        return std::sqrt(s * (s - a_) * (s - b_) * (s - c_));
+    };
+
+private:
+    const double a_;
+    const double b_;
+    const double c_;
+    const string type_ = "TRIANGLE";
+};
+
+
+class Circle : public Figure {
+public:
+    Circle(const int& r) : r_(r) {}
+
+    string Name() const override{
+        return type_;
+    };
+
+    double Perimeter() const override{
+        return 2 * r_ * 3.14;
+    };
+
+    double Area() const override{
+        return 3.14 * r_ * r_;
+    };
+
+private:
+    const int r_;
+    const string type_ = "CIRCLE";
+};
+
+
+std::shared_ptr<Figure> CreateFigure(std::istringstream& ss){
+    string figure_name;
+    ss >> figure_name;
+    if (figure_name == "RECT"){
+        int w,h;
+        ss >> w >> h;
+        return std::make_shared<Rect>(w,h); 
+    } else if(figure_name == "TRIANGLE"){
+        int a,b,c;
+        ss >> a >> b >> c;
+        return std::make_shared<Triangle>(a,b,c);
+    } else if(figure_name == "CIRCLE"){
+        int r;
+        ss >> r;
+        return std::make_shared<Circle>(r);
+    } else{
+        throw std::invalid_argument( "Wrong name of the figure");
+    }
+
+};
+ 
+
+
 
 
 int main() {
-    SmsNotifier sms{"+7-495-777-77-77"};
-    EmailNotifier email{"na-derevnyu@dedushke.ru"};
+    vector<shared_ptr<Figure>> figures;
+    for (string line; getline(cin, line); ) {
+        istringstream is(line);
 
-    Notify(sms, "I have White belt in C++");
-    Notify(email, "And want a Yellow one");
+        string command;
+        is >> command;
+        if (command == "ADD") {
+            figures.push_back(CreateFigure(is));
+        } else if (command == "PRINT") {
+            for (const auto& current_figure : figures) {
+                cout << fixed << setprecision(3)
+                    << current_figure->Name() << " "
+                    << current_figure->Perimeter() << " "
+                    << current_figure->Area() << endl;
+            }
+        }
+    }
     return 0;
 }
+
+

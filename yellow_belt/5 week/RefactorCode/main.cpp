@@ -1,91 +1,134 @@
-/*
-Refactoring the code effectively
-
-In this task, you are required to modify the code in such a way that it adheres to the principles outlined in the course.
-
-Imagine that this code has been passed down to you as an inheritance from a colleague, and now you are responsible for maintaining and improving it. The first thing you decided to do is to conduct refactoring.
-
-The ultimate goals of refactoring are:
-
-1. Simplify the future maintenance of the code.
-2. Reduce the complexity of the code.
-3. Simplify the addition of new abstractions to the program.
-
-Evaluation Criteria:
-The task will be evaluated based on the following criteria:
-
-1. Effectiveness of code execution.
-2. Code duplication.
-3. Effectiveness of using code refactoring techniques as shown in the lectures.
-
-Additionally, the code you submit should be compilable.
-
-Task:
-Conduct refactoring of the given code.
-
-*/
-
-
 #include <iostream>
 #include <string>
+#include <vector>
+
+#include <memory>
+
+ 
 
 using namespace std;
 
-void SendSms(const string& number, const string& message) {
-    cout << "Send '" << message << "' to number " << number << endl;
-}
+ 
 
-void SendEmail(const string& email, const string& message) {
-    cout << "Send '" << message << "' to e-mail "  << email << endl;
-}
+class Person {
 
-/*
- Реализуйте здесь классы INotifier, SmsNotifier, EmailNotifier
- */
-
-class INotifier {
 public:
-    virtual void Notify(const string& message) const = 0;
 
-};
+    Person(string name,string type) : name_(name), type_(type) {};
 
-
-class SmsNotifier : public INotifier {
-public:
-    SmsNotifier(const string& phone_num) : phone_num_(phone_num) {}
-
-    void Notify(const string& message) const override{
-        SendSms(phone_num_,message);
-    }
+    string get_name() const {return name_;}
+    string get_type() const {return type_;}
+    virtual void Walk(const string& destination) const = 0;
 
 private:
-    const string phone_num_;
+    const string name_;
+    const string type_;
+
 };
 
-class EmailNotifier : public INotifier {
-public:
-    EmailNotifier(const string& email_adr) : email_adr_(email_adr) {}
 
-    void Notify(const string& message) const override{
-        SendEmail(email_adr_,message);
+
+ 
+
+class Student : public Person {
+
+public:
+
+    Student(string name, string favouriteSong) : Person(name,"Student"), favourite_song_(favouriteSong) {}
+
+ 
+
+    void Learn() const {
+        cout << "Student: " << get_name() << " learns" << endl;
     }
 
+ 
+
+    void Walk(const string& destination) const override {
+        cout << "Student: " << get_name() << " walks to: " << destination << endl;
+        SingSong();
+    }
+
+ 
+
+    void SingSong() const {
+        cout << "Student: " << get_name() << " sings a song: " << favourite_song_ << endl;
+    }
+
+ 
+
 private:
-    const string email_adr_;
+    const string favourite_song_;
 };
 
 
+ 
 
-void Notify(INotifier& notifier, const string& message) {
-    notifier.Notify(message);
+class Teacher : public Person {
+
+public:
+
+    Teacher(string name, string subject) : Person(name,"Teacher"), subject_(subject) {}
+
+    void Teach() const {
+        cout << "Teacher: " << get_name() << " teaches: " << subject_ << endl;
+    }
+
+ 
+
+    void Walk(const string& destination) const override {
+        cout << "Teacher: " << get_name() << " walks to: " << destination << endl;
+    }
+
+ 
+
+private:
+    const string subject_;
+
+};
+
+
+ 
+
+class Policeman : public Person{
+
+public:
+
+    Policeman(const string& name) : Person(name,"Policeman") {}
+
+    void Check (const Person& p ) const{
+        cout << "Policeman: " << get_name() << " checks " << p.get_type() << ". " << p.get_type() << "'s name is: " << p.get_name() << endl;
+    }
+
+    void Walk(const string& destination) const override {
+        cout << "Policeman: " << get_name() << " walks to: " << destination << endl;
+    }
+
+};
+
+
+ 
+
+void VisitPlaces(const Person& pers, vector<string> places) {
+    for (auto p : places) {
+        pers.Walk(p);
+    }
 }
 
+
+
+ 
 
 int main() {
-    SmsNotifier sms{"+7-495-777-77-77"};
-    EmailNotifier email{"na-derevnyu@dedushke.ru"};
 
-    Notify(sms, "I have White belt in C++");
-    Notify(email, "And want a Yellow one");
+    Teacher t("Jim", "Math");
+    Student s("Ann", "We will rock you");
+    Policeman p("Bob");
+
+    VisitPlaces(t, {"Moscow", "London"});
+    p.Check(s);
+    VisitPlaces(s, {"Moscow", "London"});
+
     return 0;
+
 }
