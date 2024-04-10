@@ -67,7 +67,7 @@ public:
 		return capacity;
 	};
 
-	void PushBack(const T&& value){    
+	void PushBack(const T& value){    
 		if(Size() == Capacity()){
 			capacity = capacity == 0 ? 1 : 2 * capacity;
 
