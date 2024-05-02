@@ -98,15 +98,6 @@ int64_t CalculateMatrixSum(const vector<vector<int>>& matrix) {
 }
 
 
-
-
-/*
-future <int> f = async ([[&one] {return accumulate (begin(one), end(one), 0);
-});
-int result = accumulate (begin(two), end(two), 0);
-return result + f.get ();
-*/
-
 void TestCalculateMatrixSum() {
 	const vector<vector<int>> matrix = {
 		{1, 2, 3, 4},
