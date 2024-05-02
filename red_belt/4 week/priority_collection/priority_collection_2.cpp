@@ -41,6 +41,9 @@ public:
     // Determine whether the identifier belongs to any
     // object stored in the container
     bool IsValid(Id id) const {
+        if(objects[id].second == -1){
+            return false;
+        }
         return id < objects.size();
     };
 
