@@ -2,7 +2,7 @@
 
 #include <forward_list>
 #include <iterator>
-#include <unordered_map>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -24,29 +24,27 @@ public:
   const BucketList& GetBucket(const Type& value) const;
 
 private:
-  unordered_map<size_t,BucketList> hash_table;
+  vector<BucketList> hash_table;
   const Hasher& hasher;
   size_t num_buckets;
 };
 
 struct IntHasher {
   size_t operator()(int value) const {
+    // Это реальная хеш-функция из libc++, libstdc++.
+    // Чтобы она работала хорошо, std::unordered_map
+    // использует простые числа для числа бакетов
     return value;
   }
 };
 
 template <typename Type, typename Hasher>
-HashSet<Type,Hasher>::HashSet(size_t num_buckets,const Hasher& hasher): num_buckets(num_buckets),hash_table(num_buckets),hasher(hasher){
-  for(int i = 0; i < num_buckets; ++i){
-    hash_table[i];
-  }
-
-};
+HashSet<Type,Hasher>::HashSet(size_t num_buckets,const Hasher& hasher): num_buckets(num_buckets),hash_table(num_buckets),hasher(hasher) {};
 
 template <typename Type, typename Hasher>
 bool HashSet<Type,Hasher>::Has(const Type& value) const {
   size_t bucket_value = hasher(value) % num_buckets;
-  return std::find(hash_table.at(bucket_value).begin(), hash_table.at(bucket_value).end(), value) != std::end(hash_table.at(bucket_value));
+  return std::find(hash_table[bucket_value].begin(), hash_table[bucket_value].end(), value) != std::end(hash_table[bucket_value]);
   
 
 };
@@ -57,7 +55,6 @@ void HashSet<Type,Hasher>::Add(const Type& value){
   if(!Has(value)){
     hash_table[hasher(value) % num_buckets].push_front(value);
   }
-
 };
 
 
@@ -74,7 +71,7 @@ template <typename Type, typename Hasher>
 const typename HashSet<Type, Hasher>::BucketList&
 HashSet<Type, Hasher>::GetBucket(const Type& value) const {
   size_t bucket_value = hasher(value) % num_buckets;
-  return hash_table.at(bucket_value);
+  return hash_table[bucket_value];
 };
 
 
