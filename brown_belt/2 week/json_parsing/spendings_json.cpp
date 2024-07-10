@@ -46,20 +46,9 @@ vector<Spending> LoadFromJson(istream& input) {
   const Node& root = doc.GetRoot();
   const vector<Node>& children = root.AsArray();
   vector<Spending> spendings;
-  for(Node n: children){
-    const map node  = n.AsMap();
-    Spending spending = {};
-    for(auto it = node.begin(); it != node.end(); ++it){
-      if(it->first == "category"){
-        string name = it->second.AsString();
-        spending.category = name;
-        spendings.push_back(std::move(spending));
-      } else{
-        int amount = it->second.AsInt();
-        spending.amount = amount;
-      }
-      
-    }
+
+  for(const Node& node: doc.GetRoot().AsArray()){
+    spendings.push_back({node.AsMap().at("category").AsString(),node.AsMap().at("amount").AsInt()});
   }
 
   return spendings;
