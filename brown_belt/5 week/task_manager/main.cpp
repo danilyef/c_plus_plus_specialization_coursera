@@ -72,7 +72,7 @@ public:
 private:
     std::map< std::string, TasksInfo> task_tracker;
 
-    pair<TaskStatus,TaskStatus> FirstNonZeroTask(TasksInfo& person_tracker) {
+    const pair<TaskStatus,TaskStatus> FirstNonZeroTask(TasksInfo& person_tracker) {
         if (person_tracker[TaskStatus::NEW] > 0) {
             return std::make_pair(TaskStatus::NEW,TaskStatus::IN_PROGRESS);
         } else if (person_tracker[TaskStatus::IN_PROGRESS] > 0) {
