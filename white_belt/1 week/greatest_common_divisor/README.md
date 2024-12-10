@@ -1,8 +1,8 @@
-#### Programming Challenge: Greatest Common Divisor ####
+### Programming Challenge: Greatest Common Divisor
 
 *stdin* contains two natural numbers. Find their greatest common divisor.
 
-#### Example ####
+### Example
 |             stdin              |             stdout             |
 |:------------------------------:|:------------------------------:|
 | 25 27                          | 1                              |

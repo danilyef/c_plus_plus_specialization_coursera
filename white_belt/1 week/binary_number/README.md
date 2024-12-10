@@ -1,8 +1,8 @@
-#### Programming Practice: Division ####
+### Programming Practice: Division 
 
 The input is a natural number _N_. Print it in binary without leading zeros.
 
-##### Examle #####
+### Example
 
 |             stdin              |             stdout             |
 |:------------------------------:|:------------------------------:|
