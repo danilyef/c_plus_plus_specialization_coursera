@@ -1,6 +1,6 @@
-Learning objectives
+### Learning objectives
 
-* Date structures
-* Function class
-* Text files and streams
-* Exceptions
+- Date structures
+- Function class
+- Text files and streams
+- Exceptions
