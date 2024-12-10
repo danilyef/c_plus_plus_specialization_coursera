@@ -2,8 +2,8 @@
 
 Implement the class **Function** described in the lecture, which allows you to create, evaluate and invert a function consisting of the following elementary operations:
 
-• add a real number *x*
-• subtract a real number *x*
+- add a real number *x*
+- subtract a real number *x*
 
 In this case, it is necessary to declare all methods that are, in fact, constant.
 

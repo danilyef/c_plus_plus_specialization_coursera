@@ -42,11 +42,11 @@ r.numerator = 6; // Violated irreducibility invariant
 
 List of requirements for the implementation of the *Rational* class interface:
 
-1. The default constructor should create a fraction with numerator *0* and denominator *1*.
-2. When constructing an object of the Rational class with parameters *p* and *q*, the fraction *p/q* must be reduced (this is where the Greatest Common Divisor solution can come in handy).
-3. If the fraction *p/q* is negative, then the object *Rational(p, q)* must have a negative numerator and a positive denominator.
-4. If the fraction *p/q* is positive, then the object *Rational(p, q)* must have a positive numerator and denominator (note the case of *Rational(-2, -3)*).
-5. If the numerator of the fraction is equal to zero, then the denominator must be equal to *1*.
+- The default constructor should create a fraction with numerator *0* and denominator *1*.
+- When constructing an object of the Rational class with parameters *p* and *q*, the fraction *p/q* must be reduced (this is where the Greatest Common Divisor solution can come in handy).
+- If the fraction *p/q* is negative, then the object *Rational(p, q)* must have a negative numerator and a positive denominator.
+- If the fraction *p/q* is positive, then the object *Rational(p, q)* must have a positive numerator and denominator (note the case of *Rational(-2, -3)*).
+- If the numerator of the fraction is equal to zero, then the denominator must be equal to *1*.
 
 **It is guaranteed that none of the tests that will test your implementation will have a denominator equal to zero.**
 

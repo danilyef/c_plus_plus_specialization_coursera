@@ -24,9 +24,9 @@ It is guaranteed that all first and last names are non-empty.
 
 The string returned by the *GetFullName* method must contain the person's first and last name, separated by a single space, as of the end of the given year.
 
-* If there has been no last name or first name change by the current year, return the string **"Incognito"**.
-* If there was a last name change for the given year, but no first name change, return **"last_name with unknown first name"**.
-* If there was a name change for the given year, but no last name change, return **"first_name with unknown last name"**.
+- If there has been no last name or first name change by the current year, return the string **"Incognito"**.
+- If there was a last name change for the given year, but no first name change, return **"last_name with unknown first name"**.
+- If there was a name change for the given year, but no last name change, return **"first_name with unknown last name"**.
 
 ### Example 
 **Code**

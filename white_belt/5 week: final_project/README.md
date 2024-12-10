@@ -40,23 +40,23 @@ If the date does not follow the format *Year-Month-Day*, where *Year*, *Month* a
 
 If the date format is correct, the validity of the month and day must be checked.
 
-• If the month number is not a number between 1 and 12, print "Month value is invalid: *MONTH*", where *MONTH* is an invalid month number, such as 13 or -1
-• If the month is valid and the day is not between 1 and 31, print "Day value is invalid: *DAY*", where *DAY* is an invalid number of the day in the month, such as 39 or 0.
+- If the month number is not a number between 1 and 12, print "Month value is invalid: *MONTH*", where *MONTH* is an invalid month number, such as 13 or -1
+- If the month is valid and the day is not between 1 and 31, print "Day value is invalid: *DAY*", where *DAY* is an invalid number of the day in the month, such as 39 or 0.
 
 Note that:
 
-• The year value does not need to be checked separately.
-• No need to check the calendar correctness of the date: the number of days in each month is considered equal to 31, leap years do not need to be taken into account.
-• If both month and day are incorrect, then one error message per month should be displayed.
+- The year value does not need to be checked separately.
+- No need to check the calendar correctness of the date: the number of days in each month is considered equal to 31, leap years do not need to be taken into account.
+- If both month and day are incorrect, then one error message per month should be displayed.
 
 After any error in entering and printing a message, the program must terminate its execution.
 
 ### Examples:
 
-• 1-1-1 is a valid date;
-• -1-1-1 — valid date (year -1, month 1, day 1);
-• 1--1-1 — date in correct format, but with incorrect month -1;
-• 1---1-1 - the date is in the wrong format: the month cannot start with two hyphens.
+- 1-1-1 is a valid date;
+- -1-1-1 — valid date (year -1, month 1, day 1);
+- 1--1-1 — date in correct format, but with incorrect month -1;
+- 1---1-1 - the date is in the wrong format: the month cannot start with two hyphens.
 
 After processing any of the described errors in entering and printing a message, the program should terminate its execution.
 
@@ -64,10 +64,10 @@ Which input errors ***shouldn't*** be handled
 
 We do not aim to break your program in every possible way, therefore, except as described in the previous paragraph, you can rely on the correctness of the input. In particular, we guarantee that:
 
-• Each command occupies exactly one line in its entirety, although there may be empty lines in the input (they should be ignored).
-• Events always contain the specified number of arguments: the Add command is always followed by the date and event, the Find command is always followed by the date, the Del command is always followed by the date and possibly the event, and the Print command does not contain additional information.
-• All commands, dates and events are non-empty strings and do not contain spaces or other whitespace characters. (In particular, our tests do not contain the "Add 2018-02-12" command because it does not include the event name after the date.) On the other hand, the Del command may not contain events after the date: specified date (see section "Deleting multiple events").
-• Even though a date with a negative year value is considered valid, the tests are designed so that it does not need to be printed in the Print command.
+- Each command occupies exactly one line in its entirety, although there may be empty lines in the input (they should be ignored).
+- Events always contain the specified number of arguments: the Add command is always followed by the date and event, the Find command is always followed by the date, the Del command is always followed by the date and possibly the event, and the Print command does not contain additional information.
+- All commands, dates and events are non-empty strings and do not contain spaces or other whitespace characters. (In particular, our tests do not contain the "Add 2018-02-12" command because it does not include the event name after the date.) On the other hand, the Del command may not contain events after the date: specified date (see section "Deleting multiple events").
+- Even though a date with a negative year value is considered valid, the tests are designed so that it does not need to be printed in the Print command.
 
 **Example**
 
@@ -103,5 +103,5 @@ Add 0-13-32 event1
 Month value is invalid: 13
 ```
 
-**Uncaught exceptions**
+### Uncaught exceptions
 Since the solution of the problem requires a program that works correctly on a large number of different input data, then errors can inevitably be found in it, some of which we did not talk about in our lecture course. One of these errors can be an uncaught exception: the error is that the exception, when thrown, does not fall under any of the catch block expressions up to the main function. In this case, the program will immediately crash, and you will see *"Unknown signal 6"* as an error in the test.

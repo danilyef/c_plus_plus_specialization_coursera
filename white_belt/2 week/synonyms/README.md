@@ -12,8 +12,8 @@ First enter the number of requests *Q*, then *Q* lines with descriptions of requ
 ### Output format 
 For each request, print the answer to it in the corresponding line:
 
-* In response to the query **COUNT *word*** print a single integer — the number of synonyms for the word ***word***.
-* In response to the query **CHECK *word1 word2*** print the string **YES** if ***word1*** and ***word2*** are synonyms, and **NO** otherwise .
+- In response to the query **COUNT *word*** print a single integer — the number of synonyms for the word ***word***.
+- In response to the query **CHECK *word1 word2*** print the string **YES** if ***word1*** and ***word2*** are synonyms, and **NO** otherwise .
 
 ### Example 
 **Input**
