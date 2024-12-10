@@ -1,4 +1,4 @@
-#### Programming Assignment "ConcurrentMap"
+### Programming Assignment: ConcurrentMap
 
 In the template solution for the "Synchronized Template" task, we briefly touched upon the idea that reducing the size of the critical section can increase the speed of a multithreaded program. In this task, we will further develop this idea.
 

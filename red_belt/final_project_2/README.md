@@ -1,6 +1,6 @@
-#### Programming Task: Search Engine
+### Programming Task: Search Engine
 
-#### Part Two of the Task
+### Part Two of the Task
 In this part, we will simulate the operation of a web server that simultaneously handles multiple streams of search queries as well as document base updates. Your implementation will be tested as follows:
 
 ```cpp

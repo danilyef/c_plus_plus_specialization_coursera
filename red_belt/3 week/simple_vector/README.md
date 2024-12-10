@@ -1,6 +1,6 @@
-#### Task on Programming "Writing Our Vector"
+### Programming Task: Writing Our Vector
 
-Condition:
+### Condition:
 In the lectures, we have already started implementing our vector. In this task, you need to expand it: add the methods Size, Capacity, and PushBack. Send for verification the header file simple_vector.h, containing the declaration and definition of the SimpleVector class template:
 
 ```cpp

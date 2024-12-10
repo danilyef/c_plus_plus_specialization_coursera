@@ -1,4 +1,5 @@
-#### Programming Assignment "LOG Macro" ####
+### Programming Assignment "LOG Macro"
+
 You are given a Logger class and a LOG macro.
 
 ```cpp

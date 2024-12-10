@@ -1,12 +1,12 @@
-#### Programming Task: "Text Editor"
+### Programming Task: Text Editor
 
 Let's consider a simplified text editor supporting the following set of commands:
 
-1. Moving the cursor left (Left) and right (Right) by one position.
-2. Inputting a character at the current cursor position (Insert).
-3. Copying a fragment of text starting from the current cursor position to the clipboard (Copy).
-4. Cutting a fragment of text similar to copying, followed by deleting the copied characters from the text (Cut).
-5. Pasting the contents of the clipboard into the current cursor position (Paste).
+- Moving the cursor left (Left) and right (Right) by one position.
+- Inputting a character at the current cursor position (Insert).
+- Copying a fragment of text starting from the current cursor position to the clipboard (Copy).
+- Cutting a fragment of text similar to copying, followed by deleting the copied characters from the text (Cut).
+- Pasting the contents of the clipboard into the current cursor position (Paste).
 
 These commands are indeed supported by almost any text editor. Also, there are standard rules defining their effects:
 

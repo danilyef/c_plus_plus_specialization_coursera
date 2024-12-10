@@ -1,6 +1,7 @@
-#### Programming Assignment "StackVector"
+### Programming Assignment: StackVector
 
-Condition
+### Condition
+
 In the memory model section, we discussed that dynamic memory is needed to store objects that should live longer than the function that created them. Moreover, we mentioned that it is possible to create a vector that does not use heap memory but instead stores all its objects on the stack. In this task, you will have to do this. You have recently become acquainted with the array container, which stores all its data on the stack. Implement the vector interface on top of it. More formally, implement the class template `template <typename T, size_t N> StackVector<T, N>`, where T is the type of the vector element, and N is its maximum capacity. The StackVector class should have the following interface:
 
 ```cpp

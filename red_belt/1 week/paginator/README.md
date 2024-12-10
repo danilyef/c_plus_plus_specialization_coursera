@@ -1,6 +1,6 @@
-#### Programming Task "Paginator Template" ####
+### Programming Task "Paginator Template"
 
-Task:
+### Task:
 In the lecture, we developed the Head function that allows iterating through the beginning of a container using a for loop. In this task, we will take a step forward and create a Paginator template that divides the content of the container into several pages. A classic example where this might be useful in practice is distributing a list of mobile applications across the screens of a phone. Suppose we have a vector of all applications on our phone, and on one screen, we can display 20 application icons. We can distribute the applications across screens with code like this:
 
 ```cpp

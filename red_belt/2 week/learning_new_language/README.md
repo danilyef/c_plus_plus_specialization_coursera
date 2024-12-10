@@ -1,4 +1,4 @@
-#### Programming task: "Learning a new language." ####
+### Programming task: Learning a new language.
 
 The student was asked to write a class called Learner to assist in learning a foreign language. The class's public interface should have two functions:
 

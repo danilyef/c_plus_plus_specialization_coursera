@@ -1,4 +1,4 @@
-#### Programming Assignment: Swap, SortPointers, ReversedCopy
+### Programming Assignment: Swap, SortPointers, ReversedCopy
 
 In this task, you need to implement three template functions:
 

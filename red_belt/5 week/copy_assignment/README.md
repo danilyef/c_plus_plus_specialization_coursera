@@ -1,5 +1,5 @@
-#### Programming Assignment
-"Assignment Operator for SimpleVector"
+### Programming Assignment: Assignment Operator for SimpleVector
+
 In the lecture, we acquainted ourselves with the copy constructor and the assignment operator, and also wrote a copy constructor for SimpleVector. In this task, you need to implement the assignment operator for SimpleVector.
 
 Recall that the following code calls the copy constructor:

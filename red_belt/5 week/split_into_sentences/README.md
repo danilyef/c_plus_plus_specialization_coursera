@@ -1,4 +1,4 @@
-#### Programming Task: "Sentence Splitting"
+### Programming Task: Sentence Splitting
 
 Write a summary of the task and provide general instructions. If the task involves initial files, add a link to them.
 

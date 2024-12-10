@@ -1,4 +1,4 @@
-#### Programming Task: "UPDATE_FIELD" Macro ####
+### Programming Task: "UPDATE_FIELD" Macro
 
 Let's continue working on the AviaScanner flight search service. Our service stores a database of tickets in the form of a `vector<AirlineTicket>`, where `AirlineTicket` is the same structure as in the previous task. Periodically, our service visits airline websites, collects fresh information about available tickets, and updates records in its database. This is done using the `void UpdateTicket(AirlineTicket& ticket, const map<string, string>& updates)` function. The `updates` parameter contains pairs (field name, new value), including only the fields that have changed. Here is an example of how the `UpdateTicket` function works:
 

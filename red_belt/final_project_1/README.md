@@ -1,4 +1,4 @@
-#### Programming Task: Search Engine
+### Programming Task: Search Engine
 
 It would be strange to have a course from Yandex and not ask you to create your own search engine. In the final task of the "Red Belt" course, this is exactly what we will be doing :)
 
@@ -17,7 +17,7 @@ public:
 
 Let's consider its interface.
 
-#### Constructor
+### Constructor
 The constructor of the `SearchServer` class takes an input stream containing the document database. Here,
 
 - One document is one line of the input stream;
@@ -36,7 +36,7 @@ istringstream document_input(docs);
 SearchServer srv(document_input);
 ```
 
-#### Method `AddQueriesStream(istream& query_input, ostream& search_results_output)`
+### Method `AddQueriesStream(istream& query_input, ostream& search_results_output)`
 The `AddQueriesStream` method performs the actual search. It takes an input stream of search queries and an output stream for writing the search results. Here,
 
 - One query is one line in the `query_input` stream;
@@ -58,7 +58,7 @@ Two important notes:
 - Do not include documents with a `hitcount` of zero in the search results.
 - When counting the `hitcount`, only whole words should be considered, i.e., the word "there" is not a match for the word "the".
 
-#### Method `UpdateDocumentBase(istream& document_input)`
+### Method `UpdateDocumentBase(istream& document_input)`
 The `UpdateDocumentBase` method replaces the current document database with a new one contained in the `document_input` stream. The document from the first line of this stream will have the identifier (docid) 0, the document from the second line — identifier 1, and so on. The constructor of the `SearchServer` class should assign identifiers to documents in the same way. For example, the code
 
 ```cpp
@@ -84,7 +84,7 @@ the capital: {docid: 1, hitcount: 3} {docid: 0, hitcount: 2}
 the capital: {docid: 0, hitcount: 3} {docid: 1, hitcount: 2}
 ```
 
-#### Part One of the Task
+### Part One of the Task
 This task consists of two parts. In the first part, you are given a correct implementation of the `SearchServer` class that works too slowly. You need to find and eliminate bottlenecks in its implementation. You should submit a `.cpp` file or an archive of several source files containing your optimized implementation. Your implementation will be tested with the following function (an object of the `SearchServer` class will be created once, and its `AddQueriesStream` method will be called once):
 
 ```cpp

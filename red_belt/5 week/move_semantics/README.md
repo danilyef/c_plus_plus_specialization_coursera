@@ -1,4 +1,5 @@
-#### Programming task "Move semantics in SimpleVector"
+### Programming Task: Move Semantics in SimpleVector
+
 Solve the task "Implement your own vector" with the following additional requirements:
 
 The PushBack method should allow adding an element to the vector using move semantics.

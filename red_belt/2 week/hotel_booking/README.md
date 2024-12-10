@@ -1,6 +1,6 @@
-#### Programming Task: Hotel Reservation System
+### Programming Task: Hotel Reservation System
 
-Condition:
+### Condition:
 Develop a hotel reservation system that allows clients to book rooms and owners to monitor demand. Your program should process the following events:
 
 - BOOK time hotel_name client_id room_count — reserve client_id room_count rooms at hotel_name at the time specified by time. Time is measured in seconds from some point.
@@ -9,7 +9,7 @@ Develop a hotel reservation system that allows clients to book rooms and owners 
 
 - ROOMS hotel_name — output the number of rooms booked in hotel_name in the last 24 hours.
 
-Input Format:
+### Input Format:
 The first line contains the number of queries Q — a natural number not exceeding 10^5. The next Q lines, following the format described above, input the queries. It is guaranteed that:
 
 - time is an integer ranging from −10^18 to 10^18 and does not decrease from event to event.
@@ -20,14 +20,15 @@ The first line contains the number of queries Q — a natural number not exceedi
 
 - room_count is a positive integer not exceeding 1000.
 
-Output Format:
+### Output Format:
 For each CLIENTS and ROOMS query, output a single integer — the answer to the query. If the specified hotel has not had any bookings according to the query, output 0.
 
-Constraints:
+### Constraints:
 1 second to execute all queries.
 
-Example:
-Input
+### Example:
+
+**Input:**
 ```
 11
 CLIENTS Marriott
@@ -43,7 +44,7 @@ ROOMS FourSeasons
 ROOMS Marriott
 ```
 
-Output
+**Output:**
 ```
 0
 0

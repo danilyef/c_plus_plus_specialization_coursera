@@ -1,4 +1,4 @@
-#### Programming Task: "String Grouping"
+### Programming Task: String Grouping
 
 Write a review of the task and provide general instructions. If initial files are used in the task, include a link to them.
 

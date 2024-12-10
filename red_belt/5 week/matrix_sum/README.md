@@ -1,4 +1,4 @@
-#### Programming Task: "Matrix Summation"
+### Programming Task: Matrix Summation
 
 In the lectures, we've discussed an example where a square matrix was generated first, followed by finding the sum of its elements. During this process, we managed to speed up the matrix generation by utilizing multithreading. In this task, you're required to do the same for summing the elements of the matrix.
 

@@ -1,4 +1,4 @@
-#### Programming Task: "Comparator Generator" ####
+### Programming Task: Comparator Generator
 
 Let's imagine that you are developing an innovative flight ticket search service called AviaScanner. In your service, an airline ticket is represented as a structure:
 

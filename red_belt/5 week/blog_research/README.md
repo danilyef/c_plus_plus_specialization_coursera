@@ -1,4 +1,4 @@
-#### Programming Assignment "Blog Research"
+### Programming Assignment: Blog Research
 
 The major IT company Yangle is conducting research on the mention of its brand in blogs and social networks. The company's analysts have already extracted the publications of interest and formed a set of keywords. They are interested in how many times each keyword appears in the set of publications.
 

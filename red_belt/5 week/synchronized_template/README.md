@@ -1,4 +1,4 @@
-#### Programming Task: "Synchronized Template"
+### Programming Task: Synchronized Template
 
 We have seen multiple times that the lack of synchronization of access by multiple threads to the same data can fatally affect the program's operation. Therefore, it is very important not to forget to acquire a mutex when accessing shared data. But if we have a large project where access to shared data is done from many places in the code, it's not that difficult to forget to do so when making changes.
 

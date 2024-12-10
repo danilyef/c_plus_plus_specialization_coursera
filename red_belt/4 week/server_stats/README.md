@@ -1,23 +1,24 @@
-#### Programming Task: "Web Server Statistics"
+### Programming Task: Web Server Statistics
 
-Description:
+### Description
+
 Let's imagine we have a web server that serves requests to an online store. It supports the following set of HTTP requests:
 
-GET / HTTP/1.1 — get the main page of the store
+- GET / HTTP/1.1 — get the main page of the store
 
-POST /order HTTP/1.1 — place a new order
+- POST /order HTTP/1.1 — place a new order
 
-POST /product HTTP/1.1 — add a new product to the store (admin command)
+- POST /product HTTP/1.1 — add a new product to the store (admin command)
 
-GET /order HTTP/1.1 — get order details
+- GET /order HTTP/1.1 — get order details
 
-PUT /product HTTP/1.1 — same as POST /order HTTP/1.1
+- PUT /product HTTP/1.1 — same as POST /order HTTP/1.1
 
-GET /basket HTTP/1.1 — get the contents of the current client's basket
+- GET /basket HTTP/1.1 — get the contents of the current client's basket
 
-DELETE /product HTTP/1.1 — delete a product from the online store (admin command)
+- DELETE /product HTTP/1.1 — delete a product from the online store (admin command)
 
-GET /help HTTP/1.1 — get a page on how to use the online store
+- GET /help HTTP/1.1 — get a page on how to use the online store
 
 From the perspective of the HTTP protocol, the first parts of the requests above ("GET", "POST", "PUT", "DELETE") are called methods. The second parts are called URIs (Uniform Resource Identifier). The third part is the protocol version. Thus, our web server supports 4 methods: GET, POST, PUT, DELETE, and 5 URIs: "/", "/order", "/product", "/basket", "/help".
 

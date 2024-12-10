@@ -1,4 +1,4 @@
-#### Optimize comparison ####
+### Optimize comparison
 
 In this task, it is necessary to optimize the code used for sorting students by their rating. The data for each student is stored in the Student structure, declared in the student.h file. The student's rating is recorded in the rating field:
 

@@ -1,6 +1,6 @@
-#### Programming Assignment: "Priority Container"
+### Programming Assignment: Priority Container
 
-Task Description
+### Task Description
 Implement a template container PriorityCollection that allows storing objects of non-copyable type and performing the following operations with them:
 
 - add an element with zero priority;
@@ -12,7 +12,7 @@ Since adding an element involves moving it into the container, the method for in
 
 The type of the identifier — PriorityCollection::Id — should be chosen by you. It should be easily copyable, for example, a number, pointer, or iterator. Examples of defining and using the Id type can be found in the solution template.
 
-Class Structure
+### Class Structure
 ```cpp
 template <typename T>
 class PriorityCollection {
@@ -51,13 +51,13 @@ private:
 };
 ```
 
-Guarantees
-You can rely on the fact that for elements of type T, move and comparison operations (==, !=, <) are defined. All operations on elements have constant complexity.
+### Guarantees
+- For elements of type T, move and comparison operations (==, !=, <) are defined. All operations on elements have constant complexity.
 
-It is guaranteed that all added elements are distinct, but an element that has been added and then extracted may be added again.
+- All added elements are distinct, but an element that has been added and then extracted may be added again.
 
-The Get and Promote methods are always called with valid identifiers according to the IsValid method.
+- The Get and Promote methods are always called with valid identifiers according to the IsValid method.
 
-The GetMax and PopMax methods are called only when there are elements in the container.
+- The GetMax and PopMax methods are called only when there are elements in the container.
 
-If there are multiple elements with the same maximum priority, the one that was added later than the others should be selected and extracted.
+- If there are multiple elements with the same maximum priority, the one that was added later than the others should be selected and extracted.
