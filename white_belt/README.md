@@ -1,4 +1,7 @@
-### Overview  
+# C++ Development Fundamentals: White Belt
+
+![image](img.jpg)
+
 This course is dedicated to introducing the C++ programming language. You will learn to use its core constructs, create custom data types, and organize programs into classes and functions.  
 At the end of the course, you will complete a final project: independently developing a simple data storage system with functionality for adding, deleting, and searching.  
 
