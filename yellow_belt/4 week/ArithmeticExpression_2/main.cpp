@@ -1,21 +1,3 @@
-/*
-
-Construction of an arithmetic expression: Part 2
-
-Implement the construction of an arithmetic expression according to the following scheme:
-
-Initially, there is an expression consisting of some integer x.
-At each step, a certain operation is applied to the current expression: 
-- addition of a number
-- subtraction of a number
-- multiplication by a number or division by a number; 
-
-Modify the solution from the previous part to enclose the previous expression in parentheses only when the current operation has a higher priority than the previous one.
-
-
-*/
-
-
 #include <iostream>
 #include <algorithm>
 #include <deque>

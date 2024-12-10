@@ -1,4 +1,4 @@
-#### Programming Task: Subset of the set ####
+### Programming Task: Subset of the set 
 
 Write a template function called FindGreaterElements that takes a set of elements of type T and another object of type T called "border". The function should return a vector of all the elements from the set that are greater than the "border" object, in ascending order.
 

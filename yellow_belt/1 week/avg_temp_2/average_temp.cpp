@@ -1,15 +1,4 @@
 
-/*
-Given temperature values observed over N consecutive days, find the days' indices (starting from zero) with temperatures higher than the arithmetic mean for all N days.
-
-It is guaranteed that the arithmetic mean of the temperature values is an integer.
-
-Input Format:
-The input consists of an integer N, followed by N integers representing the temperature values on the 0th, 1st, ..., (N-1)th day. N is guaranteed not to exceed one million (10^6), and the temperature values, measured in millionths of a degree Celsius, range from -10^8 to 10^8. There is no need to validate these constraints; you can assume appropriate variable types based on them.
-
-Output Format:
-The output consists of the first number K, which is the count of days with temperatures higher than the arithmetic mean. After that, K integers represent the indices of these days.
-*/
 
 #include <iostream>
 #include <vector>

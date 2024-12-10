@@ -1,4 +1,4 @@
-#### Programming Task: Issue Tracker ####
+### Programming Task: Issue Tracker 
 
 
 Implement the _TeamTasks_ class, which allows you to store statistics on the status of tasks of the development team:
@@ -36,31 +36,31 @@ The _PerformPersonTasks_ method must implement the following algorithm:
 
 In addition, it is guaranteed that the _GetPersonTasksInfo_ method will not be called for a developer who does not have tasks.
 
-##### An example of how the PerformPersonTasks method works #####
+### An example of how the PerformPersonTasks method works 
 Suppose a particular developer has 10 tasks with the following statuses:
 
-* NEW — 3
-* IN_PROGRESS — 2
-* TESTING — 4
-* DONE — 1
+- NEW — 3
+- IN_PROGRESS — 2
+- TESTING — 4
+- DONE — 1
 
 The _PerformPersonTasks_ command arrives with the *task_count = 4* parameter, which means that the status is updated for 3 tasks from *NEW* to *IN_PROGRESS* and for 1 task from *IN_PROGRESS* to *TESTING*. Thus, the new task statuses will be as follows:
 
-* IN_PROGRESS - 3 updated, 1 old
-* TESTING - 1 updated, 4 old
-* DONE - 1 old
+- IN_PROGRESS - 3 updated, 1 old
+- TESTING - 1 updated, 4 old
+- DONE - 1 old
 
 In this case, you need to return a tuple of 2 dictionaries:
 
-* Updated tasks: IN_PROGRESS - 3, TESTING - 1.
-* Not updated tasks, excluding completed ones: IN_PROGRESS - 1, TESTING - 4.
+- Updated tasks: IN_PROGRESS - 3, TESTING - 1.
+- Not updated tasks, excluding completed ones: IN_PROGRESS - 1, TESTING - 4.
 
-__Dictionaries should not contain extra elements__, that is, statuses that correspond to zero tasks.
+**Dictionaries should not contain extra elements**, that is, statuses that correspond to zero tasks.
 
-##### Note #####
+### Note 
 Updating a dictionary at the same time as iterating over it can lead to unpredictable results. If such a need arises, it is recommended that you first collect information about updates in a separate temporary dictionary, and then apply them to the main dictionary.
 
-##### Example #####
+### Example 
 ```objectivec
 void PrintTasksInfo(TasksInfo tasks_info) {
   cout << tasks_info[TaskStatus::NEW] << " new tasks" <<
@@ -101,7 +101,7 @@ int main() {
 
 ```
 
-###### Output ######
+**Output**
 ```commandline
 Ilia's tasks: 1 new tasks, 0 tasks in progress, 0 tasks are being tested, 0 tasks are done
 Ivan's tasks: 3 new tasks, 0 tasks in progress, 0 tasks are being tested, 0 tasks are done

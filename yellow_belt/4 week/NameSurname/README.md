@@ -1,4 +1,4 @@
-#### Name Surnmae 4: binary search ####
+### Name Surnmae 4: binary search 
 
 Solve the "Names and Surnames - 1" problem more efficiently by using binary search in the Person::GetFullName method. Let's recall the problem statement.
 

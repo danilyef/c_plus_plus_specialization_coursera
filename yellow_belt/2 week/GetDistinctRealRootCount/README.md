@@ -1,4 +1,4 @@
-#### Programming Task: Tests for the GetDistinctRealRootCount Function ####
+### Programming Task: Tests for the GetDistinctRealRootCount Function 
 
 
 Function

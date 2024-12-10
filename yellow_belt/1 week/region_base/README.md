@@ -1,4 +1,4 @@
-#### Programming task: Regions Database ####
+### Programming task: Regions Database 
 
 There is a database of regions, represented by a vector of structures _Region_:
 ```objectivec
@@ -23,7 +23,7 @@ int FindMaxRepetitionCount(const vector<Region>& regions);
 ```
 If all entries are unique, consider the maximum number of repetitions to be 1. If there are no entries, return 0. It is guaranteed that the int type is sufficient to hold the response.
 
-##### Example #####
+### Example 
 ```objectivec
 int main() {
   cout << FindMaxRepetitionCount({
@@ -89,7 +89,7 @@ int main() {
 
 ```
 
-###### Output ######
+**Output**
 ```commandline
 3
 1

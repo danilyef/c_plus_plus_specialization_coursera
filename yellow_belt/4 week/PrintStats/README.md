@@ -1,4 +1,4 @@
-#### Demographic Stats ####
+### Demographic Stats 
 
 In this task, you need to calculate various demographic indicators for a group of people. A person is represented by the structure 'Person'
 

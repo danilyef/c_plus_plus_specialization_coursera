@@ -1,4 +1,4 @@
-#### Programming Task: Write a class declaration ####
+### Programming Task: Write a class declaration 
 
 You have been given the complete definition of the *Rectangle* class
 ```objectivec

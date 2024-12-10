@@ -1,4 +1,4 @@
-#### Notification Sending ####
+### Notification Sending 
 
 In this task, you need to develop classes SmsNotifier and EmailNotifier that send notifications as SMS and email, respectively, as well as an abstract base class for them.
 
@@ -40,9 +40,6 @@ void SendEmail(const string& email, const string& message) {
   cout << "Send '" << message << "' to e-mail "  << email << endl;
 }
 
-/*
- Реализуйте здесь классы INotifier, SmsNotifier, EmailNotifier
- */
 
 void Notify(INotifier& notifier, const string& message) {
   notifier.Notify(message);

@@ -1,17 +1,3 @@
-/*
-'Find nearest element'
-
-Write a function called FindNearestElement that, given a set of integers numbers and a specific number border, returns an iterator pointing to the element in the set that is closest to the border. If there are multiple elements that are equally close, return an iterator pointing to the smallest of those elements.
-
-cpp
-Copy code
-set<int>::const_iterator FindNearestElement(
-    const set<int>& numbers,
-    int border);
-Here, set<int>::const_iterator represents the type of iterators used for a constant set of integers.
-*/
-
-
 #include <iostream>
 #include <algorithm>
 #include <set>

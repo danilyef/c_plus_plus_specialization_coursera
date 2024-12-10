@@ -1,6 +1,4 @@
-### Learning objectives:
-
-#### Testing and Debugging
+### Learning objectives: Testing and Debugging
 
 **2.1 Testing and Debugging**
 - 2.1.1 Introduction to Unit Testing

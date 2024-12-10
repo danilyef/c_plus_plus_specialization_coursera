@@ -10,16 +10,6 @@
 
 using namespace std;
 
-/*
-List of requirements for implementing the interface of the Rational class:
-1. The default constructor should create a fraction with a numerator of 0 and a denominator of 1.
-2. When constructing an object of the Rational class with parameters p and q, the fraction p/q should be reduced.
-3. If the fraction p/q is negative, then the Rational(p, q) object should have a negative numerator and a positive denominator.
-4. If the fraction p/q is positive, then the Rational(p, q) object should have positive numerator and denominator (note the case Rational(-2, -3)).
-5. If the numerator of the fraction is zero, then the denominator should be 1.
-Develop a set of unit tests to verify the correctness of the implementation of the Rational class. There is no need to test the case when the denominator is zero.
-*/
-
 class Rational {
 public:
     Rational(){

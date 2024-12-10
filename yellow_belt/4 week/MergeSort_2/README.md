@@ -1,4 +1,4 @@
-#### Merge Sort: Part 2 ####
+### Merge Sort: Part 2   
 
 Write a template function MergeSort that takes two iterators of template type RandomIt and sorts the range specified by them using merge sort. It is guaranteed that:
 

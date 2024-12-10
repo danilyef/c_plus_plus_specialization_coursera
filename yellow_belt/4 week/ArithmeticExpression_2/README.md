@@ -1,4 +1,4 @@
-#### Construction of an arithmetic expression: Part 2 ####
+### Construction of an arithmetic expression: Part 2 
 
 Implement the construction of an arithmetic expression according to the following scheme:
 

@@ -1,19 +1,19 @@
-#### Figures ####
+### Figures 
 
 You are given the main function, which reads commands from the standard input to work with a set of geometric shapes:
 
 As seen in the code, there are two types of commands:
 
-ADD — add a shape to the set;
-PRINT — for each shape in the set, print the name, perimeter, and area.
+- ADD — add a shape to the set;
+- PRINT — for each shape in the set, print the name, perimeter, and area.
 
 The program supports three types of shapes: rectangle, triangle, and circle. Their addition is described as follows:
 
-ADD RECT width height — add a rectangle with dimensions width and height (for example, ADD RECT 2 3).
+- ADD RECT width height — add a rectangle with dimensions width and height (for example, ADD RECT 2 3).
 
-ADD TRIANGLE a b c — add a triangle with sides a, b, and c (for example, ADD TRIANGLE 3 4 5).
+- ADD TRIANGLE a b c — add a triangle with sides a, b, and c (for example, ADD TRIANGLE 3 4 5).
 
-ADD CIRCLE r — add a circle with radius r (for example, ADD CIRCLE 5).
+- ADD CIRCLE r — add a circle with radius r (for example, ADD CIRCLE 5).
 
 Without changing the main function, implement the missing functions and classes:
 
@@ -51,7 +51,7 @@ int main() {
 }
 ```
 
-- Input:
+**Input:**
 ```objectivec
 ADD RECT 2 3
 ADD TRIANGLE 3 4 5
@@ -60,7 +60,7 @@ ADD CIRCLE 5
 PRINT
 ```
 
-- Output:
+**Output:**
 ```objectivec
 RECT 10.000 6.000
 TRIANGLE 12.000 6.000

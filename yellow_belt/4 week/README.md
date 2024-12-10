@@ -1,6 +1,4 @@
-### Learning objectives:
-
-#### Iterators, Algorithms, Containers
+### Learning objectives: Iterators, Algorithms, Containers
 
 **4.1 Introduction to Iterators**
 - 4.1.1 Introduction to Iterators

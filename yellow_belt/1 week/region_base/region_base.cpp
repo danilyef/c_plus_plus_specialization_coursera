@@ -1,31 +1,3 @@
-/*
-You have a database of regions represented by a vector of Region structures:
-
-cpp
-Copy code
-struct Region {
-  string std_name;
-  string parent_std_name;
-  map<Lang, string> names;
-  int64_t population;
-};
-Here, Lang is a language identifier:
-
-cpp
-Copy code
-enum class Lang {
-  DE, FR, IT
-};
-Write a function called FindMaxRepetitionCount that takes the database of regions and determines the maximum number of repetitions (the number of occurrences of the same element) it contains. Two records (objects of type Region) are considered different if they differ in at least one field.
-
-cpp
-Copy code
-int FindMaxRepetitionCount(const vector<Region>& regions);
-If all records are unique, consider the maximum repetition count to be 1. If there are no records, return 0. It is guaranteed that the int type is sufficient to store the answer.
-
-*/
-
-
 #include <iostream>
 #include <vector>
 #include <tuple>

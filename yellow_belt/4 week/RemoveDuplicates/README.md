@@ -1,4 +1,4 @@
-#### remove Duplicates ####
+### Remove Duplicates
 
 Write a template function called RemoveDuplicates that takes a reference to a vector of elements of type T and removes all duplicate elements from it. 
 The order of the remaining elements can be arbitrary.

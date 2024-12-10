@@ -1,10 +1,3 @@
-
-/*
-Implement a template function called GetRefStrict that takes as input a map and a key value k. 
-If the element with key k is not present in the collection, the function should throw a runtime_error exception; 
-otherwise, it should return a reference to the element in the collection.
-*/
-
 #include <iostream>
 #include <map>
 #include <stdexcept>

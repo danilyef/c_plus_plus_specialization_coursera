@@ -1,7 +1,5 @@
-### Learning objectives:
-
-#### Integer Types, Tuples, Template Functions
-
+### Learning objectives: Integer Types, Tuples, Template Functions
+ 
 **1.1 Integer Types**  
 - 1.1.1 Introduction to Integer Types  
 - 1.1.2 Conversion of Integer Types  

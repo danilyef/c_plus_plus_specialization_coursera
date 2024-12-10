@@ -1,11 +1,3 @@
-/*
-Write a template function called RemoveDuplicates that takes a reference to a vector of elements of type T and removes all duplicate elements from it. 
-The order of the remaining elements can be arbitrary.
-
-It is guaranteed that objects of type T can be compared using the operators ==, !=, <, and >.
-*/
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>

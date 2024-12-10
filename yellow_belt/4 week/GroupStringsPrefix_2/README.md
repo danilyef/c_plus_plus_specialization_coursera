@@ -1,4 +1,4 @@
-#### Grouping Strings by Prefix: Part 2. Grouping by string ####
+### Grouping Strings by Prefix: Part 2. Grouping by string 
 
 Grouping Strings by Prefix: Part 2
 Write a more universal version of the FindStartsWith function that takes an arbitrary string consisting of lowercase Latin letters as a prefix.

@@ -1,6 +1,4 @@
-### Learning objectives:
-
-#### Inheritance and Polymorphism
+### Learning objectives: Inheritance and Polymorphism
 
 **5.1 Inheritance and Polymorphism**
 - 5.1.1 Introduction to Inheritance

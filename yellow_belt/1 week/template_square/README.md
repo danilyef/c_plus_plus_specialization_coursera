@@ -1,11 +1,11 @@
-#### Programming Task: All Square ####
+### Programming Task: All Square 
 
 
 Implement a _Sqr_ template function that works not only for numbers, but also for containers. The function must return a copy of the original container, modifying it as follows:
 
-* for _vector_ elements must be squared;
-* for _map_ only values ​​need to be squared, not keys;
-* for _pair_ you need to square each element of the pair.
+- for _vector_ elements must be squared;
+- for _map_ only values ​​need to be squared, not keys;
+- for _pair_ you need to square each element of the pair.
 ```objectivec
 vector<int> v = {1, 2, 3};
 cout << "vector:";

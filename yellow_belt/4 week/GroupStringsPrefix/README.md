@@ -1,4 +1,4 @@
-#### Grouping Strings by Prefix: Part 1. Grouping by Character ####
+### Grouping Strings by Prefix: Part 1. Grouping by Character
 
 Write a function called FindStartsWith:
 

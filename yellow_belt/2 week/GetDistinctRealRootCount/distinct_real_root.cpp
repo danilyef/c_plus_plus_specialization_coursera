@@ -1,9 +1,3 @@
-/*
-Returns the number of distinct real roots of the equation ax² + bx + c = 0. Develop a set of unit tests to verify the correctness of the implementation of this function.
-There is no need to test the case when all three coefficients are equal to zero.
-You can start with a template that includes our unit test framework and a placeholder for the function GetDistinctRealRootCount.
-*/
-
 #include <iostream>
 #include <map>
 #include <set>

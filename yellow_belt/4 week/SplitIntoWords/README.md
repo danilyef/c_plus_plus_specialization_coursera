@@ -1,4 +1,4 @@
-#### Word Splitting ####
+### Word Splitting 
 
 Write a function called SplitIntoWords that splits a string into words using spaces.
 

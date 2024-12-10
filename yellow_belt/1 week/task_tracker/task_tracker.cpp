@@ -1,44 +1,3 @@
-
-/*
-Implement the TeamTasks class that allows storing statistics on the statuses of the developer team's tasks.
-
-The method PerformPersonTasks should implement the following algorithm:
-
-1. Consider all the tasks of the developer person that are not completed.
-2. Order them by statuses: first, all tasks with the status NEW, then all tasks with the status IN_PROGRESS, and finally, tasks with the status TESTING.
-3. Take the first task_count tasks and change each of them to the next status according to the natural order: NEW → IN_PROGRESS → TESTING → DONE.
-4. Return a tuple of two elements: information about the updated tasks' statuses (including those that are now in the DONE status) and information about the statuses of the remaining incomplete tasks.
-
-It is guaranteed that task_count is a positive number. If task_count exceeds the current number of incomplete tasks of the developer, it is sufficient to consider task_count equal to the number of incomplete tasks. In this case, there is no need to update the status of any task twice.
-
-Also, it is guaranteed that the method GetPersonTasksInfo will not be called for a developer who has no tasks.
-
-Example of the PerformPersonTasks method:
-Suppose a specific developer has 10 tasks with the following statuses:
-
-NEW — 3
-IN_PROGRESS — 2
-TESTING — 4
-DONE — 1
-
-The PerformPersonTasks method is called with the parameter task_count = 4, which means updating the status for 3 tasks from NEW to IN_PROGRESS and for 1 task from IN_PROGRESS to TESTING. Thus, the new task statuses will be as follows:
-
-IN_PROGRESS — 3 updated, 1 old
-TESTING — 1 updated, 4 old
-DONE — 1 old
-
-In this case, you need to return a tuple of 2 dictionaries:
-
-Updated tasks: IN_PROGRESS — 3, TESTING — 1.
-Non-updated tasks, excluding completed ones: IN_PROGRESS — 1, TESTING — 4.
-
-The dictionaries should not contain unnecessary elements, meaning statuses that have zero tasks associated with them.
-
-Note:
-Updating a dictionary while iterating over it can lead to unpredictable consequences. If necessary, it is recommended to first gather information about updates in a separate temporary dictionary and then apply them to the main dictionary.
-*/
-
-
 #include <map>
 #include <vector>
 #include <tuple>
@@ -47,12 +6,12 @@ Updating a dictionary while iterating over it can lead to unpredictable conseque
 
 using namespace std;
 
-// Перечислимый тип для статуса задачи
+
 enum class TaskStatus {
-  NEW,          // новая
-  IN_PROGRESS,  // в разработке
-  TESTING,      // на тестировании
-  DONE          // завершена
+  NEW,              
+  IN_PROGRESS,  
+  TESTING,      
+  DONE          
 };
 
 
@@ -68,10 +27,6 @@ TaskStatus int_to_task(int status) {
 }
 
 
-
-
-// Объявляем тип-синоним для map<TaskStatus, int>,
-// позволяющего хранить количество задач каждого статуса
 using TasksInfo = map<TaskStatus, int>;
 
 int total_not_done_tasks(TasksInfo& developer) {
@@ -95,23 +50,18 @@ void DeleteZeros (TasksInfo& dict){
 
 class TeamTasks {
 public:
-    // Получить статистику по статусам задач конкретного разработчика
     const TasksInfo& GetPersonTasksInfo(const string& person) const{
         return board.at(person);
     };
 
-    // Добавить новую задачу (в статусе NEW) для конкретного разработчитка
     void AddNewTask(const string& person){
         ++board[person][TaskStatus::NEW];
     };
 
 
-    // Обновить статусы по данному количеству задач конкретного разработчика,
-    // подробности см. ниже
     tuple<TasksInfo, TasksInfo> PerformPersonTasks(
         const string& person, int task_count){
             
-            /*Board of one developer*/
             TasksInfo reference_developer = board[person];
             TasksInfo board_developer = board[person];
             TasksInfo updated;
@@ -164,11 +114,6 @@ private:
 };
 
 
-
-
-// Принимаем словарь по значению, чтобы иметь возможность
-// обращаться к отсутствующим ключам с помощью [] и получать 0,
-// не меняя при этом исходный словарь
 void PrintTasksInfo(const TasksInfo& tasks_info) {
     if (tasks_info.count(TaskStatus::NEW)) {
         std::cout << "NEW: " << tasks_info.at(TaskStatus::NEW) << " ";

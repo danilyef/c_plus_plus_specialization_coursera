@@ -1,16 +1,3 @@
-/*
-
-Implement the template function Sqr, which works not only for numbers but also for containers. The function should return a copy of the original container, modified as follows:
-
-For vectors, the elements should be squared.
-For maps, only the values should be squared, not the keys.
-For pairs, each element of the pair should be squared.
-The function should work correctly not only for containers consisting of numbers but also for composite objects, for example, vectors of maps of pairs of numbers.
-
-*/
-
-
-
 #include <iostream>
 #include <map>
 #include <vector>

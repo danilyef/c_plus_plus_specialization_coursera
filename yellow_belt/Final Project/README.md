@@ -1,6 +1,6 @@
-#### Final Project: Database ####
+### Final Project: Database 
 
-#### Introduction
+### Introduction
 In the course "C++ White Belt," the final task was to develop a database that works with pairs (date, event). In this task, you need to expand this database by teaching it to select and delete events that satisfy a given condition. Additionally, you should organize the code into multiple files.
 
 In more detail, your program should be able to process the following commands:
@@ -20,7 +20,7 @@ The conditions in the Find and Del commands impose certain restrictions on dates
 
 Conditions in both types of commands can be empty, and in such cases, all events are considered.
 
-#### Program Structure
+### Program Structure
 
 Below are templates for files:
 
@@ -48,17 +48,17 @@ For the review, you should send an archive consisting of files:
 
 
 
-#### How your solution will be tested
+### How your solution will be tested
 
 Testing your solution will be carried out in two stages. In the first stage, the automatic testing system will unpack the archive you send and compile the extracted files into an executable. Then, this executable will be run on a set of tests. The testing process is similar to most tasks in our course—input is fed into stdin, the program's execution time is measured, and the stdout is analyzed.
 
 In the second stage, individual files of your project will be tested. It will be verified that the `date.h` file indeed contains the declaration of the `Date` class, that `Database::FindIf` correctly performs the search according to the passed predicate, etc. We expect your classes to have an interface fixed in the `main` function. Therefore, in the `Database` and `Node` classes, make the methods have the same signatures as those used in the `main` function.
 
-Input and Output Format
+### Input and Output Format
 
 Commands for working with the database are provided in standard input, one command per line. Your program should read them and output the processing results to standard output. The rules for processing commands are outlined below.
 
-#### Command: Add
+### Command: Add
 
 Upon encountering the command `Add date event`, your program should add the pair `(date, event)` to the database and then display it when searching (command `Find`) or printing (command `Print`). Identical events occurring on the same day need not be preserved: adding an already existing pair `(date, event)` to the database should be ignored. On the same date, many different events can occur, and the database should be able to save them all.
 
@@ -66,17 +66,17 @@ It is guaranteed that the `date` field in the `Add` command has the format "Year
 
 The rest of the string in the `Add` command specifies the event. It may contain spaces, so `getline` can be used to read it. However, it is guaranteed that the event name cannot contain a quotation mark ("). Thus, this symbol can only occur in the condition in the `Find` and `Del` commands, serving as a delimiter for the event name.
 
-Example
+**Example**
 
 For the command `Add 2017-11-07 big sport event`, the program should add the pair `(2017-11-07, big sport event)` to the database.
 
-#### Command: Del
+### Command: Del
 
 Upon encountering the command `Del condition`, your program should remove from the database all events that satisfy the condition, and output the number of removed entries `N` in the format "Removed N entries" to standard output. If the condition is empty, the execution result of the command should be the clearing of the entire database.
 
-Example
+**Example**
 
-Input:
+**Input:**
 
 ```
 Add 2017-06-01 1st of June
@@ -85,21 +85,21 @@ Add 2017-07-08 Someone's birthday
 Del date == 2017-07-08
 ```
 
-Output:
+**Output:**
 
 ```
 Removed 2 entries
 ```
 
-#### Command: Print
+### Command: Print
 
 Upon encountering the command `Print`, your program should output all pairs `(date, event)` currently in the database to standard output. Pairs should be output one per line, sorted by date in ascending order. Events within the same date should be output in the order they were added (except for already deleted and attempts to add duplicates).
 
 Dates should be output in the format YYYY-MM-DD, where Y, M, D are the digits of the year, month, and day, respectively. If any number has fewer digits than required, it should be padded with zeros, for example, 0001-01-01 is the first of January of the first year.
 
-Example
+**Example**
 
-Input:
+**Input:**
 
 ```
 Add 2017-01-01 Holiday
@@ -109,7 +109,7 @@ Add 2017-1-1 New Year
 Print
 ```
 
-Output:
+**Output:**
 
 ```
 2017-01-01 Holiday
@@ -119,13 +119,13 @@ Output:
 
 Note that the event "New Year" is only output once, despite being added twice. As mentioned in the description of the `Add` command, identical events occurring on the same day need not be preserved.
 
-#### Command: Find
+### Command: Find
 
 Upon encountering the command `Find condition`, your program should output all pairs `(date, event)` currently in the database that satisfy the condition. The output format is similar to the `Print` command. A search with an empty condition is equivalent to the `Print` command. At the end, the command should output the line "Found N entries," where N is the number of found pairs.
 
-Example
+**Example**
 
-Input:
+**Input:**
 
 ```
 Add 2017-01-01 Holiday
@@ -135,7 +135,7 @@ Find event != "working day"
 Add 2017-05-09 Holiday
 ```
 
-Output:
+**Output:**
 
 ```
 2017-01-01 Holiday
@@ -144,7 +144,7 @@ Output:
 Found 3 entries
 ```
 
-#### Command: Last
+### Command: Last
 
 For the command `Last date`, output the last event that occurred on or before the given date. More formally:
 
@@ -152,9 +152,9 @@ For the command `Last date`, output the last event that occurred on or before th
 - Among all events with that date, select the last one added and output it in the format similar to the `Print` command.
 - If the date is earlier than all existing dates, output "No entries."
 
-Example
+**Example**
 
-Input:
+**Input:**
 
 ```
 Add 2017-01-01 New Year
@@ -166,7 +166,7 @@ Last 2017-06-01
 Add 2017-05-09 Holiday
 ```
 
-Output:
+**Output:**
 
 ```
 No entries
@@ -174,9 +174,9 @@ No entries
 2017-03-08 Holiday
 ```
 
-Example
+**Example**
 
-Input:
+**Input:**
 
 ```
 Add 2017-11-21 Tuesday
@@ -190,7 +190,7 @@ Last 2017-11-30
 Last 2017-11-01
 ```
 
-Output:
+**Output:**
 
 ```
 2017-11-20 Monday

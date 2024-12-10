@@ -1,6 +1,4 @@
-### Learning objectives:
-
-#### Code Separation Across Files
+### Learning objectives: Code Separation Across Files
 
 **3.1 Organizing Code Across Files**  
 - 3.1.1 Introduction to Multi-File Development Using the "Synonyms" Task as an Example  

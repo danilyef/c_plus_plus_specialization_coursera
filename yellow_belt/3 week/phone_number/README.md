@@ -1,7 +1,6 @@
-#### Programming Task: Implement the class declared in the header file ####
+### Programming Task: Implement the class declared in the header file
 You are given a *phone_number.h* header file containing the *PhoneNumber* class declaration. At the same time, the comments describe the behavior that is expected from the implementation of this class.
 
-[phone_number.h](https://github.com/Hitoku/basics-of-c-plus-plus-development-yellow-belt/blob/master/Week_3/02%20Programming%20Assignment/Source/phone_number.h)
 
 ```objectivec
 #pragma once
