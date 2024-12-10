@@ -1,4 +1,4 @@
-#### Programming Task: Expression Tree
+### Programming Task: Expression Tree
 
 In this task, we will use the smart pointer `unique_ptr` to manage the lifetime of a tree of polymorphic objects. Specifically, we will work with an arithmetic expression tree. The nodes of the tree will represent numbers and operations.
 

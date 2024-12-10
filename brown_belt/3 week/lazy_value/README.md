@@ -1,4 +1,4 @@
-#### Programming Task "LazyValue Template"
+### Programming Task "LazyValue Template"
 
 Sometimes, in practice, you encounter objects whose creation takes a significant amount of time, but they are not needed during every run of the program. For example, a version control system client may access local files or may need to access a remote repository. In this case, establishing a connection to the remote repository should only happen if the user decides to access it.
 

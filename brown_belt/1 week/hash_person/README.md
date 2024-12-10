@@ -1,4 +1,4 @@
-#### Programming Task Integrating the Person Structure into an unordered_set
+### Programming Task: Integrating the Person Structure into an unordered_set
 
 We want to learn how to integrate the Person structure into the unordered_set<Person, PersonHasher> container. To do this, you need to implement the PersonHasher and AddressHasher structures, as well as the comparison operators:
 
@@ -34,6 +34,6 @@ struct PersonHasher {
 
 To achieve this, use the standard hash functions `std::hash` and combine the field hashes using a polynomial, as demonstrated in the lecture.
 
-#### Requirements:
+### Requirements:
 1. The hash functions should depend on all fields of the structures.
 2. The hash function should distribute Person objects uniformly; this property is checked by the TestDistribution test in the solution template.

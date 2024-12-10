@@ -1,4 +1,4 @@
-#### Programming Assignment: Const Correctness in the ConcurrentMap Template
+### Programming Assignment: Const Correctness in the ConcurrentMap Template
 
 **Note:**
 We have already added const correctness to the `Synchronized` template, which was developed in the "C++ Red Belt". Now, it's time to apply similar improvements to another template from the "Basic Multithreading" module—`ConcurrentMap`. Since we originally created this in the "C++ Red Belt", we've studied two important topics—unordered containers and mutable fields. We will now use this knowledge to bring `ConcurrentMap` closer to an industrial-grade implementation.

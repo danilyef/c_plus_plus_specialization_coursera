@@ -1,4 +1,4 @@
-#### Programming Assignment Loading Expenses from JSON Format
+### Programming Assignment Loading Expenses from JSON Format
 
 In this training exercise, you need to support the loading of expenses from the JSON format into our personal finance management program. You should use a pre-existing library for working with JSON. Specifically, you need to write a function `vector<Spending> LoadFromJson(istream& input)`. `Spending` is a structure from the introductory lecture:
 

@@ -1,5 +1,4 @@
-
-#### Programming Task: Demographic Indicators 2.0
+### Programming Task: Demographic Indicators 2.0
 
 You’ve started a new job and joined a long-standing project. The project involves researching various indicators based on census results. As is often the case, the project started as a simple system solving one problem, but over time, new features were added to it, usually in a rush and at the last minute.
 
@@ -28,7 +27,8 @@ Types of commands:
 
 - **POPULAR_NAME W** — The program should output "Most popular name among people of gender W is S", where S is the most common female name. If there are multiple such names, output the lexicographically smallest one. If there are no such names, output "No people of gender W".
 
-**Example**
+### Example
+
 **Input**
 
 ```

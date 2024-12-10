@@ -1,4 +1,4 @@
-#### Programming Task "Hash Table"
+### Programming Task: Hash Table
 
 Now that you know how unordered containers are structured internally, you are asked to implement a simplified version of a hash table yourself. Implement the HashSet template:
 

@@ -1,4 +1,4 @@
-#### Programming Task: "Cache"
+### Programming Task: Cache
 
 In this task, we will work with `shared_ptr` in a multithreaded environment.
 

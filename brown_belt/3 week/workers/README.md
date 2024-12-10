@@ -1,4 +1,4 @@
-#### Programming Task: "Pipeline"
+### Programming Task: Pipeline
 
 **Introduction**
 Many programs are designed to batch-process large numbers of homogeneous records. Often, the processing of these records can be divided into logically independent stages, simplifying the joint development of new features and allowing these stages to be easily combined into new configurations. You can imagine such processing as a flow of objects moving along a pipeline from one handler to another. In this task, you are to complete the implementation of such a pipeline.

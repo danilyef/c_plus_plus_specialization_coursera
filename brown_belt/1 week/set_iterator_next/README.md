@@ -1,4 +1,4 @@
-#### Programming Assignment: "set::iterator++"
+### Programming Assignment: "set::iterator++"
 
 In the lectures, you learned about the internal structure of the map and set containers. Typically, map and set are implemented as binary search trees.
 

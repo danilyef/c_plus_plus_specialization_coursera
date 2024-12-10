@@ -1,4 +1,4 @@
-#### Programming Task: Zoo
+### Programming Task: Zoo
 You are working with a class hierarchy that describes animals:
 
 ```cpp

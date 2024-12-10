@@ -1,4 +1,4 @@
-#### Programming Task: RAII Booking
+### Programming Task: RAII Booking
 
 In the lecture, we wrote a `TripManager` class for booking a set of flights and hotels, using the auxiliary classes `FlightProvider` and `HotelProvider`. Following the RAII idiom, we moved the booked set into a separate `Trip` class. The code written during the lecture was slightly modified and placed in the files `old_booking_providers.h` and `old_trip_manager.h`.
 

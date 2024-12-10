@@ -1,4 +1,4 @@
-#### Programming Task: Library for Working with INI Files
+### Programming Task: Library for Working with INI Files
 
 In the lectures, we developed libraries for loading data from XML and JSON formats, placing each of them in its own namespace. In this task, you need to do the same for the INI format. You need to develop a library with the following interface:
 

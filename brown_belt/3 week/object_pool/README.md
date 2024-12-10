@@ -1,4 +1,4 @@
-#### Programming Task: Object Pool
+### Programming Task: Object Pool
 
 In practice, we often encounter objects whose creation takes significant time, such as threads, TCP connections, or database connections. Therefore, when such an object is no longer needed, it is not destroyed but set aside for later reuse. In this task, you are required to implement such a scheme — you need to write a class template `ObjectPool`:
 

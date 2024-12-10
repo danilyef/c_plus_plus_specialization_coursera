@@ -1,4 +1,4 @@
-#### Programming Assignment: Code Restructuring
+### Programming Assignment: Code Restructuring
 
 In the previous video, we demonstrated how namespaces can be used to structure code and divide it into logical blocks. In this task, you will practice this concept.
 

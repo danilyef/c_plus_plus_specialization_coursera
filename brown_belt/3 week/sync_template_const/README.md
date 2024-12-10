@@ -1,4 +1,4 @@
-#### Programming Task: "Constancy in the Synchronized Template 
+### Programming Task: Constancy in the Synchronized Template
 
 **Note:**
 This task is a continuation of the task "Synchronized Template" from the "Red Belt in C++." Below is its full description with the necessary additions. Therefore, if you haven't completed the "Red Belt," you can simply solve this task from scratch.

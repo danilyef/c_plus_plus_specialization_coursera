@@ -1,4 +1,4 @@
-#### Task: Implementing a `UniquePtr` Template
+### Programming Task: Implementing a `UniquePtr` Template
 
 You are asked to implement a simplified version of the `unique_ptr<T>` class. The full specification for the standard `unique_ptr` can be found on [cppreference](https://en.cppreference.com/w/cpp/memory/unique_ptr). For this task, you do not need to handle array specialization or provide a custom deleter. Your class should be named `UniquePtr`. The class should have one template parameter `T`, which represents the type of the object that the pointer will manage.
 

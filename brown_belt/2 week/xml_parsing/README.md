@@ -1,4 +1,4 @@
-#### Programming Assignment Loading Expenses from XML Format
+### Programming Assignment Loading Expenses from XML Format
 
 In this practice problem, you need to support the loading of expenses from XML format into our personal finance management program. You should use an existing XML processing library. Specifically, you need to write a function `vector<Spending> LoadFromXml(istream& input)`. `Spending` is a structure introduced in the introductory lecture:
 
@@ -22,7 +22,7 @@ The `input` stream contains an expense description in XML format, for example:
 </july>
 ```
 
-Important notes:
+### Important notes:
 
 - The text format in the `input` stream is always strictly as shown in the example: there is a single root node containing several `<spend>` nodes with "amount" and "category" attributes.
 - The `Load` function from the provided XML library is capable of loading the format described above.

@@ -1,4 +1,4 @@
-#### Task: Programming Assignment "Secondary Index in a Database
+### Programming Assignment: Secondary Index in a Database
 
 Data storage often requires fast search capabilities across any field. To achieve this, auxiliary data structures called secondary indexes are constructed to speed up searches. Implement such a storage for data of type `Record` as defined below:
 

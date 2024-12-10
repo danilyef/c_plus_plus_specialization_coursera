@@ -1,4 +1,4 @@
-#### Programming Task: "Task Tracker"
+### Programming Task: Task Tracker
 
 Implement the `TeamTasks` class to keep track of task statuses for a team of developers.
 

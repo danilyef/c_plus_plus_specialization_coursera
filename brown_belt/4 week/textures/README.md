@@ -1,4 +1,4 @@
-#### Programming Task "Textures"
+### Programming Task: Textures
 
 In the lectures, you have been introduced to the smart pointer `shared_ptr`, which provides shared ownership of an object. In this task, you need to implement classes for shapes that can be rendered on an image and that jointly own a given texture.
 
