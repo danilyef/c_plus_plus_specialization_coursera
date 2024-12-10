@@ -1,8 +1,8 @@
-#### Programming Task: Sequence Reversal ####
+### Programming Task: Sequence Reversal 
 
 Implement a *void Reverse(vector<int>& v)* function that reverses the elements of a vector.
 
-##### Example #####
+### Example 
 
 ```objectivec
 vector<int> numbers = {1, 5, 3, 4, 2};

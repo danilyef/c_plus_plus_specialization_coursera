@@ -1,4 +1,4 @@
-#### Programming Task: Bus Stops - 2 ####
+### Programming Task: Bus Stops - 2 
 
 In this problem, you need to assign numbers to bus routes.
 
@@ -6,21 +6,21 @@ Namely, for each route given by a set of stop names, you need to either return a
 
 Sets of stops obtained from each other by a permutation of stops are considered different (see example).
 
-##### Note #####
+### Note 
 In C++, a dictionary key can be not only a number or a string, but also another container, such as *vector*.
 
-##### Input format #####
+### Input format 
 First enter the number of requests *Q*, then *Q* descriptions of requests.
 
 Each request is a positive number of stops *N* followed by space-separated *N* different stop names for the corresponding route. Stop names consist only of Latin letters and underscores.
 
-##### Output format #####
+### Output format 
 Print the answer to each query on a separate line.
 
 If a route with this set of stops already exists, print **Already exists for *i***, where ***i*** is the number of the route with this set of stops. Otherwise, allocate a new number ***i*** to the entered set of stops and output it in the format **New bus *i***.
 
-##### Example #####
-###### Input ######
+### Example 
+**Input**
 ```objectivec
 4
 2 Marushkino Kokoshkino
@@ -29,7 +29,7 @@ If a route with this set of stops already exists, print **Already exists for *i*
 2 Kokoshkino Marushkino
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 New bus 1
 New bus 2

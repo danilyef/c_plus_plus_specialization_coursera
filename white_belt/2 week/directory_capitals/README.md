@@ -1,4 +1,4 @@
-#### Programming task: Directory of capitals ####
+### Programming task: Directory of capitals 
 
 Implement a directory of country capitals.
 
@@ -9,10 +9,10 @@ The program receives the following requests:
 * **ABOUT *country*** - displays the capital of the country ***country***.
 * **DUMP** - displays the capitals of all countries.
 
-##### Input format #####
+### Input format 
 The first line contains the number of queries *Q*, the next *Q* lines contain the descriptions of the queries. All names of countries and capitals consist only of Latin letters, numbers and underscores.
 
-##### Output format #####
+### Output format 
 Print the result of processing each request:
 
 In response to the query **CHANGE_CAPITAL *country* *new_capital*** print
@@ -37,8 +37,8 @@ In response to the **DUMP** prompt, output
 * **There are no countries in the world** if no countries have been added yet;
 * space-separated ***country/capital*** pairs describing the capitals of all countries and sorted by country name if there is already at least one country in the world.
 
-##### Example 1 #####
-###### Input ######
+### Example 1 
+**Input**
 ```objectivec
 6
 CHANGE_CAPITAL RussianEmpire Petrograd
@@ -49,7 +49,7 @@ CHANGE_CAPITAL USSR Moscow
 DUMP
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 Introduce new country RussianEmpire with capital Petrograd
 Country RussianEmpire with capital Petrograd has been renamed to RussianRepublic
@@ -58,8 +58,8 @@ Country RussianRepublic with capital Petrograd has been renamed to USSR
 Country USSR has changed its capital from Petrograd to Moscow
 USSR/Moscow
 ```
-##### Example 2 #####
-###### Input ######
+### Example 2 
+**Input**
 ```objectivec
 RENAME FakeCountry FarFarAway
 ABOUT FarFarAway
@@ -87,7 +87,7 @@ DUMP
 RENAME USSR USSR
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 Incorrect rename, skip
 Country FarFarAway doesn't exist
@@ -115,8 +115,8 @@ FederativeRepublicOfBrazil/Brasilia USSR/Moscow
 Incorrect rename, skip
 ```
 
-##### Example 3 #####
-###### Input ######
+### Example 3 
+**Input**
 ```objectivec
 10
 CHANGE_CAPITAL RussianEmpire Petrograd
@@ -131,7 +131,7 @@ RENAME RussianEmpire UnitedStatesOfBrazil
 DUMP
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 Introduce new country RussianEmpire with capital Petrograd
 Incorrect rename, skip

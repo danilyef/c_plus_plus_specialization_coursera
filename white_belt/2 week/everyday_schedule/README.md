@@ -1,4 +1,4 @@
-#### Programming Task: Monthly To Do ####
+### Programming Task: Monthly To Do 
 
 Each of us has monthly tasks, each of which needs to be done on a specific day of each month: payment of electricity bills, subscription fees for communications, etc. You need to implement work with a list of such tasks, namely, the processing of the following operations:
 
@@ -25,23 +25,23 @@ Go to the to-do list for the new month. When this command is executed, instead o
 * if the next month has more days than the current one, the "additional" days must be left empty (not containing cases);
 * if the next month has fewer days than the current one, fewer days, cases from all "extra" days must be moved to the last day of the next month.
 
-##### Notes #####
+### Note 
 
 * The history of to-do lists is ***not required***, work is done only with the current to-do list of the current month. What's more, when creating a to-do list for the next month, it "***flashes***" the previous list.
 * Please note that the number of ***NEXT*** commands in the total sequence of commands when working with the to-do list can exceed 11.
 * The initial current month is January.
 * The number of days in the months correspond to the Gregorian calendar, with the only difference being that February always has 28 days.
 
-##### Input format #####
+### Input format 
 First, the number of operations *Q*, then the descriptions of the operations.
 
 Case names ***s*** are unique and consist only of Latin letters, numbers and underscores. Day numbers ***i*** are integers and are numbered from 1 to the size of the current month.
 
-##### Output format #####
+### Output format 
 For each operation of the **DUMP** type, on a separate line print the number of tasks on the corresponding day, and then their names, separating them with a space. The order in which cases are displayed within each operation does not matter.
 
-##### Example #####
-###### Input ######
+### Example 
+**Input**
 ```objectivec
 12
 ADD 5 Salary
@@ -58,7 +58,7 @@ ADD 28 Payment
 DUMP 28
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 1 Salary
 2 WalkPreparations Walk
@@ -68,7 +68,7 @@ DUMP 28
 3 WalkPreparations Walk Payment
 ```
 
-##### Notes #####
+### Note 
 To append all elements of the *v2* vector to the end of the *v1* vector, it is convenient to use the *insert* method:
 
 ```objectivec

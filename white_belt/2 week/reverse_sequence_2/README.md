@@ -1,8 +1,8 @@
-#### Programming Task: Sequence Reversal - 2 ####
+### Programming Task: Sequence Reversal - 2 
 
 Implement *vector<int> Reversed(const vector<int>& v)* to return a copy of v with the numbers reversed.
 
-##### Exampe #####
+### Example 
 
 |           Vector v             |            Result              |
 |:------------------------------:|:------------------------------:|
