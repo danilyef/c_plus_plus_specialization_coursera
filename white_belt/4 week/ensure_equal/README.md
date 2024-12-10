@@ -1,4 +1,4 @@
-#### Programming Task: EnsureEqual Function ####
+### Programming Task: EnsureEqual Function 
 
 Write functon
 ```objectivec

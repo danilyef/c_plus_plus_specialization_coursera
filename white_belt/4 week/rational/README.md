@@ -1,6 +1,6 @@
-#### Programming Task: Rational Class ####
+### Programming Task: Rational Class 
 
-##### Description #####
+### Description 
 In this problem, you need to develop a class to represent rational numbers and embed it into the C++ type system so that it can be used naturally.
 ```objectivec
 #include <iostream>
@@ -13,7 +13,7 @@ int main() {
 }
 ```
 
-##### Part 1 #####
+### Part 1 
 In the first part, you need to implement the *Rational* class, which is a rational number of the form *p/q*, where *p* is an integer and *q* is a natural number. It should have the following interface:
 ```objectivec
 class Rational {
@@ -50,7 +50,7 @@ List of requirements for the implementation of the *Rational* class interface:
 
 **It is guaranteed that none of the tests that will test your implementation will have a denominator equal to zero.**
 
-##### Part 2 #####
+### Part 2 
 Implement the ==, +, and - operators for the *Rational* class so that fractional operations can be written naturally. For example, the following code must be valid:
 ```objectivec
 const Rational r = Rational(1, 2) + Rational(1, 3) - Rational(1, 4);
@@ -59,7 +59,7 @@ if (r == Rational(7, 12)) {
 }
 ```
 
-##### Part 3 #####
+### Part 3 
 Similar to the previous part, implement the * and / operators. For example, the following code must be valid:
 ```objectivec
 const Rational r = Rational(1, 2) * Rational(1, 3) / Rational(1, 4);
@@ -70,7 +70,7 @@ if (r == Rational(2, 3)) {
 
 **It is guaranteed that none of the tests that will test your implementation will perform division by zero.**
 
-##### Part 4 #####
+### Part 4 
 In this part, you need to implement the input and output operators for the *Rational* class. As a result, the following code should work for you, for example
 ```objectivec
 Rational r;
@@ -78,7 +78,7 @@ cin >> r;
 cout << r;
 ```
 
-##### Part 5 #####
+### Part 5 
 Finally, you need to implement the ability to use objects of the *Rational* class as elements of the *set* container and keys in the *map* container. Example:
 ```objectivec
 set<Rational> rationals;

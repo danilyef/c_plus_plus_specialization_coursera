@@ -1,4 +1,4 @@
-#### Programming Assignment: LectureTitle Structure ####
+### Programming Assignment: LectureTitle Structure 
 
 Given a *LectureTitle* structure:
 ```objectivec
