@@ -1,4 +1,4 @@
-#### Programming Task: Sorted Strings ####
+### Programming Task: Sorted Strings 
 
 Implement a class that maintains a set of rows in sorted order. The class must contain two public methods:
 ```objectivec
@@ -15,8 +15,8 @@ private:
 };
 ```
 
-##### Example #####
-###### Code ######
+### Example 
+**Code**
 ```objectivec
 void PrintSortedStrings(SortedStrings& strings) {
   for (const string& s : strings.GetSortedStrings()) {
@@ -40,7 +40,7 @@ int main() {
 }
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 first second third
 first second second third

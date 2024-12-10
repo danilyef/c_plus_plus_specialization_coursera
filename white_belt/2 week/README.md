@@ -1,4 +1,4 @@
-### Goals:
+### Learning objectives:
 
 1. Apply functions in C++
 2. Use vector container

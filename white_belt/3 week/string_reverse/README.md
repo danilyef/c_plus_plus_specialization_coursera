@@ -1,9 +1,9 @@
-#### Programming Task: String ####
+### Programming Task: String 
 
 Implement a *ReversibleString* class that stores a string and supports *Reverse* methods to reverse a string and *ToString* methods to get a string.
 
-##### Example #####
-###### Code ######
+### Example 
+**Code**
 ```objectivec
 int main() {
   ReversibleString s("live");
@@ -22,7 +22,7 @@ int main() {
 }
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 evil
 live

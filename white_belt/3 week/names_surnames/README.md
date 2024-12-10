@@ -1,4 +1,4 @@
-#### Programming task: First and last names ####
+### Programming task: First and last names 
 
 Implement a class for a person that maintains a history of the person's changes to their last name and first name.
 
@@ -28,8 +28,8 @@ The string returned by the *GetFullName* method must contain the person's first 
 * If there was a last name change for the given year, but no first name change, return **"last_name with unknown first name"**.
 * If there was a name change for the given year, but no last name change, return **"first_name with unknown last name"**.
 
-##### Example #####
-###### Code ######
+### Example 
+**Code**
 ```objectivec
 int main() {
   Person person;
@@ -54,7 +54,7 @@ int main() {
 }
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 Incognito
 Polina with unknown last name
@@ -67,8 +67,8 @@ Appolinaria Volkova
 
 Unlike the *GetFullName* method, the *GetFullNameWithHistory* method must return not only the last first and last name by the end of the current year, but also all previous first and last names in reverse chronological order. If the current facts indicate that a person changed his last name or first name to the same two times in a row, the second change should be ignored when forming the story.
 
-##### Example 2 #####
-###### Code ######
+### Example 2 
+**Code**
 ```objectivec
 int main() {
   Person person;
@@ -108,7 +108,7 @@ int main() {
 }
 ```
 
-###### Output ######
+**Output**
 ```objectivec
 Incognito
 Polina with unknown last name

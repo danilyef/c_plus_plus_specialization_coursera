@@ -1,7 +1,7 @@
-Learning objectives
+### Learning objectives
 
-* Apply algorithms
-* Know the visibility and initialization of variables
-* Structures and classes
-* Method constancy
-* Constructors
+1. Apply algorithms
+2. Know the visibility and initialization of variables
+3. Structures and classes
+4. Method constancy
+5. Constructors
