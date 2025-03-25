@@ -15,6 +15,13 @@ std::optional<Json::Node> ModifyRequest::Process(DatabaseStats::Database& db) {
 }
 
 
+Json::Node ReadRequest::CreateNotFoundResponse(int request_id) const {
+    return Json::Node(std::map<std::string,Json::Node>{
+        {"request_id", Json::Node(request_id)},
+        {"error_message", Json::Node(std::string("not found"))}
+    });
+}
+
 /*AddStopRequest*/
 void AddStopRequest::ParseFromNode(const Json::Node& node){
     stop_name = node.AsMap().at("name").AsString();
@@ -68,12 +75,7 @@ Json::Node GetBusRequest::CreateSuccessResponse(int request_id, const Descriptio
     });
 }
 
-Json::Node GetBusRequest::CreateNotFoundResponse(int request_id) const {
-    return Json::Node(std::map<std::string,Json::Node>{
-        {"request_id", Json::Node(request_id)},
-        {"error_message", Json::Node(std::string("not found"))}
-    });
-}
+
 
 GetBusRequest::GetBusRequest(): ReadRequest(Type::GET_BUS){};
 Json::Node GetBusRequest::ProcessRead(const DatabaseStats::Database& db) const {
@@ -82,7 +84,7 @@ Json::Node GetBusRequest::ProcessRead(const DatabaseStats::Database& db) const {
         const Descriptions::BusInformation& busInfoObject = bus->get();
         return GetBusRequest::CreateSuccessResponse(request_id, busInfoObject);
     } 
-    return GetBusRequest::CreateNotFoundResponse(request_id);
+    return CreateNotFoundResponse(request_id);
 };
 
 
@@ -101,12 +103,6 @@ Json::Node GetStopRequest::CreateSuccessResponse(int request_id, const Descripti
     });
 }
 
-Json::Node GetStopRequest::CreateNotFoundResponse(int request_id) const {
-    return Json::Node(std::map<std::string,Json::Node>{
-        {"request_id", Json::Node(request_id)},
-        {"error_message", Json::Node(std::string("not found"))}
-    });
-}
 
 GetStopRequest::GetStopRequest(): ReadRequest(Type::GET_STOP){};
 Json::Node GetStopRequest::ProcessRead(const DatabaseStats::Database& db) const {
@@ -115,7 +111,7 @@ Json::Node GetStopRequest::ProcessRead(const DatabaseStats::Database& db) const 
         const Descriptions::StopInformation& stopInfoObject = stop->get();
         return GetStopRequest::CreateSuccessResponse(request_id, stopInfoObject);
     } 
-    return GetStopRequest::CreateNotFoundResponse(request_id);
+    return CreateNotFoundResponse(request_id);
 };
 
 
@@ -170,12 +166,6 @@ Json::Node GetRouteRequest::CreateSuccessResponse(int request_id, Json::Node ite
     });
 }
 
-Json::Node GetRouteRequest::CreateNotFoundResponse(int request_id) const {
-    return Json::Node(std::map<std::string,Json::Node>{
-        {"request_id", Json::Node(request_id)},
-        {"error_message", Json::Node(std::string("not found"))}
-    });
-}
 
 Json::Node GetRouteRequest::ProcessRead(const DatabaseStats::Database& db) const { 
     const auto route = db.transport_router.BuildRoute(from, to);
@@ -185,7 +175,7 @@ Json::Node GetRouteRequest::ProcessRead(const DatabaseStats::Database& db) const
         return GetRouteRequest::CreateSuccessResponse(request_id, items, total_time);
     }
     
-    return GetRouteRequest::CreateNotFoundResponse(request_id);
+    return CreateNotFoundResponse(request_id);
 
 }
 

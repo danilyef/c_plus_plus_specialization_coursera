@@ -52,6 +52,7 @@ struct ReadRequest : Request {
     using Request::Request;
     virtual Json::Node ProcessRead(const DatabaseStats::Database& db) const = 0;
     std::optional<Json::Node> Process(DatabaseStats::Database& db) override;
+    Json::Node CreateNotFoundResponse(int request_id) const;
 };
 
 struct ModifyRequest : Request {
@@ -83,7 +84,6 @@ struct GetBusRequest: ReadRequest {
     GetBusRequest();
     Json::Node ProcessRead(const DatabaseStats::Database& db) const override ;
     Json::Node CreateSuccessResponse(int request_id, const Descriptions::BusInformation& busInfo) const;
-    Json::Node CreateNotFoundResponse(int request_id) const;
     void ParseFromNode(const Json::Node& node) override;
     std::string bus_id;
     int request_id;
@@ -94,7 +94,6 @@ struct GetStopRequest: ReadRequest {
     GetStopRequest();
     Json::Node ProcessRead(const DatabaseStats::Database& db) const override;
     Json::Node CreateSuccessResponse(int request_id, const Descriptions::StopInformation& stopInfo) const;
-    Json::Node CreateNotFoundResponse(int request_id) const;
     void ParseFromNode(const Json::Node& node) override;
     std::string stop_name;
     int request_id;
@@ -106,7 +105,6 @@ struct GetRouteRequest: ReadRequest {
     Json::Node CreateWaitItem(const Descriptions::Wait& wait) const;
     Json::Node CreateStopRouteItem(const Descriptions::StopRoute& route) const;
     Json::Node CreateSuccessResponse(int request_id, Json::Node items, double total_time) const;
-    Json::Node CreateNotFoundResponse(int request_id) const;
     std::pair<Json::Node, double> ProcessRouteItems(const std::vector<Descriptions::RouteInfo>& route) const;
     void ParseFromNode(const Json::Node& node) override;
     std::string from;
