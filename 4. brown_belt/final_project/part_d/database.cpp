@@ -100,15 +100,18 @@ int CalculateTotalLengthStops(const std::unordered_map<std::string, Descriptions
     return total_length;
 }
 
-Database::Database(size_t vertex_count) : transport_router(vertex_count){};
-
-void Database::AddBus(std::string bus_id, std::vector<std::string> stops,bool is_roundtrip){
-    bus_db.emplace(std::move(bus_id), Descriptions::BusInformation(std::move(stops),is_roundtrip));
 };
 
 
+Database::Database(size_t vertex_count) : transport_router(vertex_count){};
+
+void Database::AddBus(std::string bus_id, std::vector<std::string> stops,bool is_roundtrip){
+    std::unique_lock<std::shared_mutex> lock(std::mutex);
+    bus_db.try_emplace(std::move(bus_id), Descriptions::BusInformation(std::move(stops),is_roundtrip));
+};
 
 std::optional<std::reference_wrapper<const Descriptions::BusInformation>> Database::GetBusInfo(const std::string& bus_id) const {
+    std::shared_lock<std::shared_mutex> lock(mutex);
     auto it = bus_db.find(bus_id);
     if (it != bus_db.end()) {
         return it->second;
@@ -116,15 +119,15 @@ std::optional<std::reference_wrapper<const Descriptions::BusInformation>> Databa
     return std::nullopt;
 };
 
-
-
 /*Database Stop*/
 void Database::AddStop(std::string stop_name, Descriptions::Coordinates coordinates, std::unordered_map<std::string, int> neighbors){
-    stop_db.emplace(std::move(stop_name), Descriptions::StopInformation(coordinates, neighbors));
+    std::unique_lock<std::shared_mutex> lock(mutex);
+    stop_db.try_emplace(std::move(stop_name), Descriptions::StopInformation(coordinates, neighbors));
 };
 
 
 std::optional<std::reference_wrapper<const Descriptions::StopInformation>> Database::GetStopInfo(const std::string& stop_name) const{
+    std::shared_lock<std::shared_mutex> lock(mutex);
     auto it = stop_db.find(stop_name);
     if (it != stop_db.end()) {
         return it->second;
@@ -141,13 +144,13 @@ void Database::UpdateBusStats(){
         const auto& stops_list = bus_info.bus_stops;
 
         /*Total stops*/ 
-        int total_stops = bus_info.is_roundtrip ? CalculateTotalStops(stops_list) : CalculateTotalStops(stops_list) * 2 - 1;
+        int total_stops = bus_info.is_roundtrip ? DatabaseStats::CalculateTotalStops(stops_list) : DatabaseStats::CalculateTotalStops(stops_list) * 2 - 1;
         /*Unique stops*/
-        int unique_stops_count = CalculateUniqueStops(stops_list);
+        int unique_stops_count = DatabaseStats::CalculateUniqueStops(stops_list);
         /*Total length Coordinates*/
-        double total_length = CalculateTotalLengthCoordinates(stop_db, stops_list, bus_info.is_roundtrip);
+        double total_length = DatabaseStats::CalculateTotalLengthCoordinates(stop_db, stops_list, bus_info.is_roundtrip);
         /*Total length stops*/
-        int total_length_stops = CalculateTotalLengthStops(stop_db, stops_list, bus_info.is_roundtrip);
+        int total_length_stops = DatabaseStats::CalculateTotalLengthStops(stop_db, stops_list, bus_info.is_roundtrip);
         /*Curvature*/
         double curvature = total_length_stops / total_length;
         /* Update */
@@ -163,7 +166,7 @@ void Database::UpdateStopStats(){
         for(const auto& stop_name : bus_info.bus_stops){
             auto it = stop_db.find(stop_name);
             if(it != stop_db.end()){
-                it->second.buses.insert(bus_id);
+                it->second.buses.emplace(bus_id);
             }
         }
     }
@@ -171,6 +174,7 @@ void Database::UpdateStopStats(){
 
 
 void Database::UpdateDatabase(){
+    std::unique_lock<std::shared_mutex> lock(mutex);
     UpdateBusStats();
     UpdateStopStats();
     BuildGraph();
@@ -183,23 +187,21 @@ void Database::InitializeRouter(){
 
 
 void Database::BuildGraph(){
-    Graph::DirectedWeightedGraph<double>& graph = transport_router.GetGraph();
-
     for (const auto& [bus_id, bus_info] : bus_db) {
-        ForwardPass(bus_id, bus_info, graph);
+        ForwardPass(bus_id, bus_info);
         
         if (!bus_info.is_roundtrip) {
-            BackwardPass(bus_id, bus_info, graph);
+            BackwardPass(bus_id, bus_info);
         }
     }
 }
 
-void Database::ForwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info, Graph::DirectedWeightedGraph<double>& graph) {
-    ProcessBusRoute(bus_id, bus_info, graph, true);
+void Database::ForwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info) {
+    ProcessBusRoute(bus_id, bus_info, true);
 }
 
-void Database::BackwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info, Graph::DirectedWeightedGraph<double>& graph) {
-    ProcessBusRoute(bus_id, bus_info, graph, false);
+void Database::BackwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info) {
+    ProcessBusRoute(bus_id, bus_info, false);
 }
 
 
@@ -211,28 +213,14 @@ RouteLoopParams GetLoopParams(bool is_forward, int stop_count) {
     };
 }
 
-std::pair<Graph::VertexId, Graph::VertexId> Database::AddRouteEdge(
-    const std::pair<Graph::VertexId, Graph::VertexId>& from_vertex_pair,
-    const std::string& to_stop,
-    double total_route_time,
-    Graph::DirectedWeightedGraph<double>& graph,
-    int span_count) {
-    
-    auto to_vertex_pair = transport_router.AddWaitTimeEdge(to_stop);
-    graph.AddEdge({from_vertex_pair.second, to_vertex_pair.first, total_route_time});
-    
-    return to_vertex_pair;
-}
 
 void Database::ProcessSingleStop(
     const std::string& bus_id,
     const std::string& from_stop,
     const std::vector<std::string>& stops,
     int current_pos,
-    const RouteLoopParams& params,
-    Graph::DirectedWeightedGraph<double>& graph) {
+    const RouteLoopParams& params) {
     
-    auto from_vertex_pair = transport_router.AddWaitTimeEdge(from_stop);
     double total_route_time = 0.0;
     int span_count = 0;
     
@@ -244,17 +232,24 @@ void Database::ProcessSingleStop(
         total_route_time += segment_time;
         span_count++;
         
-        auto to_vertex_pair = AddRouteEdge(from_vertex_pair, to_stop, total_route_time, graph, span_count);
+        auto from_vertex_pair = transport_router.AddStopToId(from_stop);
+        auto to_vertex_pair = transport_router.AddStopToId(to_stop);
+
+        transport_router.AddWaitTimeEdge(from_vertex_pair.first, from_vertex_pair.second);
+        transport_router.AddRouteInfo(std::make_pair(from_vertex_pair.first, from_vertex_pair.second), Descriptions::Wait{transport_router.GetWaitTime(), from_stop, "Wait"});
+
+        transport_router.AddWaitTimeEdge(to_vertex_pair.first, to_vertex_pair.second);
+        transport_router.AddRouteInfo(std::make_pair(to_vertex_pair.first, to_vertex_pair.second), Descriptions::Wait{transport_router.GetWaitTime(), to_stop, "Wait"});
+
+        transport_router.AddRouteEdge(from_vertex_pair.second, to_vertex_pair.first, total_route_time);
         transport_router.AddRouteInfo(std::make_pair(from_vertex_pair.second, to_vertex_pair.first),Descriptions::StopRoute{total_route_time, bus_id, span_count, "Bus"});
     }
 }
 
 
-
 void Database::ProcessBusRoute(
     const std::string& bus_id, 
-    const Descriptions::BusInformation& bus_info, 
-    Graph::DirectedWeightedGraph<double>& graph,
+    const Descriptions::BusInformation& bus_info,
     bool is_forward) {
     
     if (bus_id.empty()) {
@@ -272,21 +267,21 @@ void Database::ProcessBusRoute(
     
     for (int i = params.start_idx; i != params.end_idx; i += params.step) {
         const std::string& from_stop = stops[i];
-        ProcessSingleStop(bus_id, from_stop, stops, i, params, graph);
+        ProcessSingleStop(bus_id, from_stop, stops, i, params);
     }
 }
 
 double Database::CalculateTimeBetweenStops(const std::string& from_stop, const std::string& to_stop) {
         if (stop_db.at(from_stop).neighbors.count(to_stop)) {
             int distance = stop_db.at(from_stop).neighbors.at(to_stop);
-            return ComputeTime(distance, transport_router.GetVelocity());
+            return DatabaseStats::ComputeTime(distance, transport_router.GetVelocity());
         } else {
             int distance = stop_db.at(to_stop).neighbors.at(from_stop);
-        return ComputeTime(distance, transport_router.GetVelocity());
+        return DatabaseStats::ComputeTime(distance, transport_router.GetVelocity());
     }
 }
 
-};
+
 
 
 

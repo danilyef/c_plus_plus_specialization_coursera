@@ -7,6 +7,7 @@
 #include <functional>
 #include "types.h"
 #include "transport_router.h"
+#include <shared_mutex>
 
 
 namespace DatabaseStats {
@@ -17,6 +18,7 @@ namespace DatabaseStats {
     double CalculateTotalLength(const std::unordered_map<std::string, Descriptions::Coordinates>& stops, const std::vector<std::string>& bus_route, bool is_roundtrip); 
     double CalculateTotalLengthCoordinates(const std::unordered_map<std::string, Descriptions::StopInformation>& stops, const std::vector<std::string>& bus_route, bool is_roundtrip);
     int CalculateTotalLengthStops(const std::unordered_map<std::string, Descriptions::StopInformation>& stops, const std::vector<std::string>& bus_route, bool is_roundtrip);
+};
 
 
 struct RouteLoopParams {
@@ -49,21 +51,21 @@ public:
 private:
     std::unordered_map<std::string,Descriptions::BusInformation> bus_db;
     std::unordered_map<std::string,Descriptions::StopInformation> stop_db;
+    mutable std::shared_mutex mutex; 
 
     /*Stats*/
     void UpdateBusStats();
     void UpdateStopStats();
 
-    void ForwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info, Graph::DirectedWeightedGraph<double>& graph);
-    void BackwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info, Graph::DirectedWeightedGraph<double>& graph);
-    void ProcessBusRoute(const std::string& bus_id, const Descriptions::BusInformation& bus_info, Graph::DirectedWeightedGraph<double>& graph, bool is_forward);
-    void ProcessSingleStop(const std::string& bus_id, const std::string& from_stop, const std::vector<std::string>& stops, int current_pos, const RouteLoopParams& params, Graph::DirectedWeightedGraph<double>& graph);
-    std::pair<Graph::VertexId, Graph::VertexId>  AddRouteEdge(const std::pair<Graph::VertexId, Graph::VertexId>& from_vertex_pair, const std::string& to_stop, double total_route_time, Graph::DirectedWeightedGraph<double>& graph, int span_count);
+    void ForwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info);
+    void BackwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info);
+    void ProcessBusRoute(const std::string& bus_id, const Descriptions::BusInformation& bus_info, bool is_forward);
+    void ProcessSingleStop(const std::string& bus_id, const std::string& from_stop, const std::vector<std::string>& stops, int current_pos, const RouteLoopParams& params);
+   
 
     double CalculateTimeBetweenStops(const std::string& from_stop, const std::string& to_stop);
 };
 
-};
 
 
 

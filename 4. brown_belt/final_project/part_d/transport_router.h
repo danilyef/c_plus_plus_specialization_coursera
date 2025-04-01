@@ -36,13 +36,15 @@ public:
     double GetVelocity() const;
     double GetWaitTime() const;
 
-    std::optional<size_t> GetStopToId(const std::string& stop_name) const;
+    std::optional<Graph::VertexId> GetStopToId(const std::string& stop_name) const;
 
     /*Other*/
+    std::pair<Graph::VertexId, Graph::VertexId> AddStopToId(const std::string& stop_name);
     const std::optional<std::vector<Descriptions::RouteInfo>> BuildRoute(const std::string& from, const std::string& to) const;
-    std::pair<size_t,size_t>  AddWaitTimeEdge(const std::string& stop_name);
+    void AddWaitTimeEdge(const Graph::VertexId& from_vertex, const Graph::VertexId& to_vertex);
+    
+    void AddRouteEdge(const Graph::VertexId& from_vertex, const Graph::VertexId& to_vertex, double total_route_time);
     void AddRouteInfo(std::pair<size_t, size_t> edge, Descriptions::RouteInfo route_info);
-
 
 
 private:
@@ -53,6 +55,7 @@ private:
     std::unordered_map<std::pair<size_t, size_t>, Descriptions::RouteInfo, RouterDbHash> route_db;
 
     Descriptions::RoutingSettings routing_settings;
+
 };
 
 

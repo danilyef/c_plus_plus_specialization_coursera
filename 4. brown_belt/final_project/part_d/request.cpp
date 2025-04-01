@@ -4,12 +4,12 @@
 Request::Request(Type type): type_(type){};
 
 /*ReadRequest*/
-std::optional<Json::Node> ReadRequest::Process(DatabaseStats::Database& db) {
+std::optional<Json::Node> ReadRequest::Process(Database& db) {
     return ProcessRead(db);
 }
 
 /*ModifyRequest*/
-std::optional<Json::Node> ModifyRequest::Process(DatabaseStats::Database& db) {
+std::optional<Json::Node> ModifyRequest::Process(Database& db) {
     ProcessModify(db);
     return std::nullopt;
 }
@@ -34,7 +34,7 @@ void AddStopRequest::ParseFromNode(const Json::Node& node){
 
 
 AddStopRequest::AddStopRequest(): ModifyRequest(Type::ADD_STOP){};
-    void AddStopRequest::ProcessModify(DatabaseStats::Database& db){
+    void AddStopRequest::ProcessModify(Database& db){
     if(neighbors.empty()){
         db.AddStop(std::move(stop_name), std::move(coordinates));
     } else {
@@ -54,7 +54,7 @@ void AddBusRequest::ParseFromNode(const Json::Node& node){
 }
 
 AddBusRequest::AddBusRequest(): ModifyRequest(Type::ADD_BUS){};
-void AddBusRequest::ProcessModify(DatabaseStats::Database& db){
+void AddBusRequest::ProcessModify(Database& db){
     db.AddBus(std::move(bus_id), std::move(stops), is_roundtrip);
 }
 
@@ -78,7 +78,7 @@ Json::Node GetBusRequest::CreateSuccessResponse(int request_id, const Descriptio
 
 
 GetBusRequest::GetBusRequest(): ReadRequest(Type::GET_BUS){};
-Json::Node GetBusRequest::ProcessRead(const DatabaseStats::Database& db) const {
+Json::Node GetBusRequest::ProcessRead(const Database& db) const {
     const auto& bus = db.GetBusInfo(bus_id);
     if(bus){
         const Descriptions::BusInformation& busInfoObject = bus->get();
@@ -105,7 +105,7 @@ Json::Node GetStopRequest::CreateSuccessResponse(int request_id, const Descripti
 
 
 GetStopRequest::GetStopRequest(): ReadRequest(Type::GET_STOP){};
-Json::Node GetStopRequest::ProcessRead(const DatabaseStats::Database& db) const {
+Json::Node GetStopRequest::ProcessRead(const Database& db) const {
     const auto& stop = db.GetStopInfo(stop_name);
     if(stop){
         const Descriptions::StopInformation& stopInfoObject = stop->get();
@@ -167,7 +167,7 @@ Json::Node GetRouteRequest::CreateSuccessResponse(int request_id, Json::Node ite
 }
 
 
-Json::Node GetRouteRequest::ProcessRead(const DatabaseStats::Database& db) const { 
+Json::Node GetRouteRequest::ProcessRead(const Database& db) const { 
     const auto route = db.transport_router.BuildRoute(from, to);
 
     if(route){
@@ -196,7 +196,7 @@ RequestHolder Request::Create(Request::Type request_type){
     }
 };
 
-std::optional<Request::Type> DetermineOperationType(const Json::Node& node, std::string_view type){
+std::optional<Request::Type> RequestManager::DetermineOperationType(const Json::Node& node, std::string_view type){
     const auto& request_map = node.AsMap().count("id")>0 ? GET_REQUEST_TYPES : ADD_REQUEST_TYPES;
     if (auto it = request_map.find(type); it != request_map.end()) {
         return it->second;
@@ -204,7 +204,7 @@ std::optional<Request::Type> DetermineOperationType(const Json::Node& node, std:
     return std::nullopt;
 }
 
-RequestHolder ParseRequest(const Json::Node &request_node){
+RequestHolder RequestManager::ParseRequest(const Json::Node &request_node){
     const auto& request_type = DetermineOperationType(request_node, request_node.AsMap().at("type").AsString());
     RequestHolder request = Request::Create(*request_type);
     if(request){
@@ -215,12 +215,12 @@ RequestHolder ParseRequest(const Json::Node &request_node){
 
 
 
-Json::Document LoadJson(std::istream& in_stream){
+Json::Document RequestManager::LoadJson(std::istream& in_stream){
     return Json::Load(in_stream);
 }
 
 
-std::vector<RequestHolder> ReadRequests(std::string_view request_type, Json::Document& doc) {
+std::vector<RequestHolder> RequestManager::ReadRequests(std::string_view request_type, Json::Document& doc) {
     const auto& nodes = doc.GetRoot().AsMap().at(std::string(request_type)).AsArray();
     std::vector<RequestHolder> requests;
     requests.reserve(nodes.size());
@@ -234,7 +234,7 @@ std::vector<RequestHolder> ReadRequests(std::string_view request_type, Json::Doc
 }
 
 
-const Json::Node ProcessRequests(const std::vector<RequestHolder>& requests, DatabaseStats::Database& db){
+const Json::Node RequestManager::ProcessRequests(const std::vector<RequestHolder>& requests, Database& db){
     std::vector<Json::Node> responses;
 
     for (const auto& request_holder: requests){
@@ -247,7 +247,7 @@ const Json::Node ProcessRequests(const std::vector<RequestHolder>& requests, Dat
 }
 
 
-void ProcessRoutingSettings(Json::Document& doc , DatabaseStats::Database& db){
+void RequestManager::ProcessRoutingSettings(Json::Document& doc , Database& db){
     const auto& routing_settings = doc.GetRoot().AsMap().at("routing_settings").AsMap();
     db.transport_router.SetRoutingSettings(routing_settings.at("bus_wait_time").AsDouble() * 1.0, routing_settings.at("bus_velocity").AsDouble() * 1000.0);
 }

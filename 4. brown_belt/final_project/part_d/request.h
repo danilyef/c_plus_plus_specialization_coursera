@@ -30,7 +30,7 @@ struct Request {
     explicit Request(Type type);
     static RequestHolder Create(Type type);
     virtual void ParseFromNode(const Json::Node& node) = 0;
-    virtual std::optional<Json::Node> Process(DatabaseStats::Database& db) = 0;
+    virtual std::optional<Json::Node> Process(Database& db) = 0;
     virtual ~Request() = default;
     const Type type_;
 };
@@ -50,20 +50,20 @@ const std::unordered_map<std::string_view, Request::Type> GET_REQUEST_TYPES = {
 
 struct ReadRequest : Request {
     using Request::Request;
-    virtual Json::Node ProcessRead(const DatabaseStats::Database& db) const = 0;
-    std::optional<Json::Node> Process(DatabaseStats::Database& db) override;
+    virtual Json::Node ProcessRead(const Database& db) const = 0;
+    std::optional<Json::Node> Process(Database& db) override;
     Json::Node CreateNotFoundResponse(int request_id) const;
 };
 
 struct ModifyRequest : Request {
     using Request::Request;
-    virtual void ProcessModify(DatabaseStats::Database& db) = 0;
-    std::optional<Json::Node> Process(DatabaseStats::Database& db) override;
+    virtual void ProcessModify(Database& db) = 0;
+    std::optional<Json::Node> Process(Database& db) override;
 };
 
 struct AddStopRequest: ModifyRequest {
     AddStopRequest();
-    void ProcessModify(DatabaseStats::Database& db) override;
+    void ProcessModify(Database& db) override;
     void ParseFromNode(const Json::Node& node) override;
     std::string stop_name; 
     Descriptions::Coordinates coordinates;
@@ -72,7 +72,7 @@ struct AddStopRequest: ModifyRequest {
 
 struct AddBusRequest: ModifyRequest {
     AddBusRequest();
-    void ProcessModify(DatabaseStats::Database& db) override;
+    void ProcessModify(Database& db) override;
     void ParseFromNode(const Json::Node& node) override;
     std::vector<std::string> stops;
     std::string bus_id;
@@ -82,7 +82,7 @@ struct AddBusRequest: ModifyRequest {
 
 struct GetBusRequest: ReadRequest {
     GetBusRequest();
-    Json::Node ProcessRead(const DatabaseStats::Database& db) const override ;
+    Json::Node ProcessRead(const Database& db) const override ;
     Json::Node CreateSuccessResponse(int request_id, const Descriptions::BusInformation& busInfo) const;
     void ParseFromNode(const Json::Node& node) override;
     std::string bus_id;
@@ -92,7 +92,7 @@ struct GetBusRequest: ReadRequest {
 
 struct GetStopRequest: ReadRequest {
     GetStopRequest();
-    Json::Node ProcessRead(const DatabaseStats::Database& db) const override;
+    Json::Node ProcessRead(const Database& db) const override;
     Json::Node CreateSuccessResponse(int request_id, const Descriptions::StopInformation& stopInfo) const;
     void ParseFromNode(const Json::Node& node) override;
     std::string stop_name;
@@ -101,7 +101,7 @@ struct GetStopRequest: ReadRequest {
 
 struct GetRouteRequest: ReadRequest {
     GetRouteRequest();
-    Json::Node ProcessRead(const DatabaseStats::Database& db) const override;
+    Json::Node ProcessRead(const Database& db) const override;
     Json::Node CreateWaitItem(const Descriptions::Wait& wait) const;
     Json::Node CreateStopRouteItem(const Descriptions::StopRoute& route) const;
     Json::Node CreateSuccessResponse(int request_id, Json::Node items, double total_time) const;
@@ -113,11 +113,12 @@ struct GetRouteRequest: ReadRequest {
 };
 
 
-
-std::optional<Request::Type> DetermineOperationType(const Json::Node& node, std::string_view type);
-Json::Document LoadJson(std::istream& in_stream);
-RequestHolder ParseRequest(const Json::Node& request_node);
-std::vector<RequestHolder> ReadRequests(std::string_view request_type, Json::Document& doc);
-const Json::Node ProcessRequests(const std::vector<RequestHolder>& requests, DatabaseStats::Database& db);
-void ProcessRoutingSettings(Json::Document& doc , DatabaseStats::Database& db);
+namespace RequestManager{
+    std::optional<Request::Type> DetermineOperationType(const Json::Node& node, std::string_view type);
+    Json::Document LoadJson(std::istream& in_stream);
+    RequestHolder ParseRequest(const Json::Node& request_node);
+    std::vector<RequestHolder> ReadRequests(std::string_view request_type, Json::Document& doc);
+    const Json::Node ProcessRequests(const std::vector<RequestHolder>& requests, Database& db);
+    void ProcessRoutingSettings(Json::Document& doc , Database& db);
+}
 

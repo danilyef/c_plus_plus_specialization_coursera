@@ -37,7 +37,7 @@ const Graph::Router<double>* TransportRouter::GetRouter() const{
     return router.get();
 }
 
-std::optional<size_t> TransportRouter::GetStopToId(const std::string& stop_name) const{
+std::optional<Graph::VertexId> TransportRouter::GetStopToId(const std::string& stop_name) const{
     const auto it = stop_to_id_map.find(stop_name);
     if(it != stop_to_id_map.end()){
         return it->second;
@@ -45,21 +45,26 @@ std::optional<size_t> TransportRouter::GetStopToId(const std::string& stop_name)
     return std::nullopt;
 }
 
-/*Other*/
-std::pair<size_t,size_t>  TransportRouter::AddWaitTimeEdge(const std::string& stop_name){
+std::pair<Graph::VertexId, Graph::VertexId> TransportRouter::AddStopToId(const std::string& stop_name){
     size_t id = stop_to_id_map.size();
-    if (stop_to_id_map.find(stop_name) == stop_to_id_map.end()){
-        stop_to_id_map.insert({stop_name + "_wait", id});
-        stop_to_id_map.insert({stop_name, id + 1});
+    auto it_first = stop_to_id_map.try_emplace(stop_name + "_wait", id);
+    auto it_second = stop_to_id_map.try_emplace(stop_name, id + 1);
+    return {it_first.first->second, it_second.first->second};
+}
 
-        route_db.emplace(std::make_pair(id, id + 1), Descriptions::Wait{GetWaitTime(), stop_name, "Wait"});
-        graph.AddEdge({id, id + 1, GetWaitTime()});
-        
-        return {id, id + 1};
-    } 
+/*Other*/
+void TransportRouter::AddWaitTimeEdge(const Graph::VertexId& from_vertex, const Graph::VertexId& to_vertex){
+        graph.AddEdge({from_vertex, to_vertex, GetWaitTime()});    
+}
+
+
+void TransportRouter::AddRouteEdge(
+    const Graph::VertexId& from_vertex,
+    const Graph::VertexId& to_vertex,
+    double total_route_time) {
     
-    return {stop_to_id_map[stop_name + "_wait"],stop_to_id_map[stop_name]};
-
+    graph.AddEdge({from_vertex, to_vertex, total_route_time});
+    
 }
 
 void TransportRouter::AddRouteInfo(std::pair<size_t, size_t> edge, Descriptions::RouteInfo route_info){
@@ -91,6 +96,7 @@ const std::optional<std::vector<Descriptions::RouteInfo>> TransportRouter::Build
             const auto& edge = graph.GetEdge(edge_id);
             route_info.push_back(route_db.at(std::make_pair(edge.from, edge.to)));
         }
+        router->ReleaseRoute(route.value().id);
         return std::move(route_info);
     } 
     
