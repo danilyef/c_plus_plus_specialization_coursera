@@ -7,7 +7,6 @@
 #include <functional>
 #include "types.h"
 #include "transport_router.h"
-#include <shared_mutex>
 
 
 namespace DatabaseStats {
@@ -51,7 +50,6 @@ public:
 private:
     std::unordered_map<std::string,Descriptions::BusInformation> bus_db;
     std::unordered_map<std::string,Descriptions::StopInformation> stop_db;
-    mutable std::shared_mutex mutex; 
 
     /*Stats*/
     void UpdateBusStats();

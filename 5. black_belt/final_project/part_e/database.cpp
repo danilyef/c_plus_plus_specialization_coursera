@@ -106,12 +106,10 @@ int CalculateTotalLengthStops(const std::unordered_map<std::string, Descriptions
 Database::Database(size_t vertex_count) : transport_router(vertex_count){};
 
 void Database::AddBus(std::string bus_id, std::vector<std::string> stops,bool is_roundtrip){
-    std::unique_lock<std::shared_mutex> lock(std::mutex);
     bus_db.try_emplace(std::move(bus_id), Descriptions::BusInformation(std::move(stops),is_roundtrip));
 };
 
 std::optional<std::reference_wrapper<const Descriptions::BusInformation>> Database::GetBusInfo(const std::string& bus_id) const {
-    std::shared_lock<std::shared_mutex> lock(mutex);
     auto it = bus_db.find(bus_id);
     if (it != bus_db.end()) {
         return it->second;
@@ -121,13 +119,11 @@ std::optional<std::reference_wrapper<const Descriptions::BusInformation>> Databa
 
 /*Database Stop*/
 void Database::AddStop(std::string stop_name, Descriptions::Coordinates coordinates, std::unordered_map<std::string, int> neighbors){
-    std::unique_lock<std::shared_mutex> lock(mutex);
     stop_db.try_emplace(std::move(stop_name), Descriptions::StopInformation(coordinates, neighbors));
 };
 
 
 std::optional<std::reference_wrapper<const Descriptions::StopInformation>> Database::GetStopInfo(const std::string& stop_name) const{
-    std::shared_lock<std::shared_mutex> lock(mutex);
     auto it = stop_db.find(stop_name);
     if (it != stop_db.end()) {
         return it->second;
@@ -174,7 +170,6 @@ void Database::UpdateStopStats(){
 
 
 void Database::UpdateDatabase(){
-    std::unique_lock<std::shared_mutex> lock(mutex);
     UpdateBusStats();
     UpdateStopStats();
     BuildGraph();
