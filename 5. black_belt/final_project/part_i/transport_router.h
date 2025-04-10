@@ -51,7 +51,7 @@ public:
 
 
 private:
-    Graph::DirectedWeightedGraph<double> graph;
+    Graph::DirectedWeightedGraph<double> graph; // unique pointer to Graph or unique pointer to TransportRouter in DB to prevent invalidation of references
     std::unique_ptr<Graph::Router<double>> router;
 
     std::unordered_map<std::string, size_t> stop_to_id_map;

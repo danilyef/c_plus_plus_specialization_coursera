@@ -39,9 +39,8 @@ void TestMapRendering() {
 
 
 int main() {
-    //TestMapRendering();
-    
 
+    
     const int vertex_count = 202;
     
     Database db(vertex_count);
@@ -50,15 +49,13 @@ int main() {
     
     RequestManager::ProcessRoutingSettings(doc, db);
     RequestManager::ProcessRenderSettings(doc, db);
-    const auto requests_insert = RequestManager::ReadRequests("base_requests", doc);
-    RequestManager::ProcessRequests(requests_insert, db);
+    RequestManager::ProcessRequests(RequestManager::ReadRequests("base_requests", doc), db);
 
     db.UpdateDatabase();
     db.InitializeRouter();
     db.RenderMap();
 
-    const auto requests_get = RequestManager::ReadRequests("stat_requests", doc);
-    const Json::Node responses = RequestManager::ProcessRequests(requests_get, db);
+    const Json::Node responses = RequestManager::ProcessRequests(RequestManager::ReadRequests("stat_requests", doc), db);
     
     PrintNode(responses, std::cout);
 

@@ -35,8 +35,7 @@ class Database {
 
 public:
     Database(size_t vertex_count);
-    TransportRouter transport_router;
-    Map map;
+
     void InitializeRouter();
 
     /*Getters*/
@@ -51,22 +50,30 @@ public:
     void UpdateDatabase();
     void RenderMap();
 
+    /*Transport Router Access*/
+    const std::optional<std::vector<Descriptions::RouteInfo>> BuildRoute(const std::string& from, const std::string& to) const;
+    void SetRoutingSettings(const Json::Node& routing_settings_node);
+    
+    /*Map Access*/
+    const Svg::Document& GetMap() const;
+    void SetRenderSettings(const Json::Node& render_settings_node);
 
 private:
     std::map<std::string,Descriptions::BusInformation> bus_db;
     std::map<std::string,Descriptions::StopInformation> stop_db;
+    std::unique_ptr<TransportRouter> transport_router;
+    Map map;
 
     /*Stats*/
     void UpdateBusStats();
     void UpdateStopStats();
-
-    void BuildGraph();
     void UpdateMappingCoordinates();
 
-
+    /*Functions related to graph building*/
+    void BuildGraph();
     void ForwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info);
     void BackwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info);
-    void ProcessBusRoute(const std::string& bus_id, const Descriptions::BusInformation& bus_info, bool is_forward);
+    void ProcessSingleBusRoute(const std::string& bus_id, const Descriptions::BusInformation& bus_info, bool is_forward);
     void ProcessSingleStop(const std::string& bus_id, const std::string& from_stop, const std::vector<std::string>& stops, int current_pos, const RouteLoopParams& params);
    
 

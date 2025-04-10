@@ -106,7 +106,7 @@ int CalculateTotalLengthStops(const std::map<std::string, Descriptions::StopInfo
 };
 
 
-Database::Database(size_t vertex_count) : transport_router(vertex_count){};
+Database::Database(size_t vertex_count) : transport_router(std::make_unique<TransportRouter>(vertex_count)){};
 
 void Database::AddBus(std::string bus_id, std::vector<std::string> stops,bool is_roundtrip){
     bus_db.try_emplace(std::move(bus_id), Descriptions::BusInformation(std::move(stops),is_roundtrip));
@@ -204,7 +204,7 @@ void Database::UpdateDatabase(){
 
 
 void Database::InitializeRouter(){
-    transport_router.SetRouter(transport_router.GetGraph());
+    transport_router->SetRouter(transport_router->GetGraph());
 }
 
 
@@ -219,11 +219,11 @@ void Database::BuildGraph(){
 }
 
 void Database::ForwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info) {
-    ProcessBusRoute(bus_id, bus_info, true);
+    ProcessSingleBusRoute(bus_id, bus_info, true);
 }
 
 void Database::BackwardPass(const std::string& bus_id, const Descriptions::BusInformation& bus_info) {
-    ProcessBusRoute(bus_id, bus_info, false);
+    ProcessSingleBusRoute(bus_id, bus_info, false);
 }
 
 
@@ -254,22 +254,22 @@ void Database::ProcessSingleStop(
         total_route_time += segment_time;
         span_count++;
         
-        auto from_vertex_pair = transport_router.AddStopToId(from_stop);
-        auto to_vertex_pair = transport_router.AddStopToId(to_stop);
+        auto from_vertex_pair = transport_router->AddStopToId(from_stop);
+        auto to_vertex_pair = transport_router->AddStopToId(to_stop);
 
-        transport_router.AddWaitTimeEdge(from_vertex_pair.first, from_vertex_pair.second);
-        transport_router.AddRouteInfo(std::make_pair(from_vertex_pair.first, from_vertex_pair.second), Descriptions::Wait{transport_router.GetWaitTime(), from_stop, "Wait"});
+        transport_router->AddWaitTimeEdge(from_vertex_pair.first, from_vertex_pair.second);
+        transport_router->AddRouteInfo(std::make_pair(from_vertex_pair.first, from_vertex_pair.second), Descriptions::Wait{transport_router->GetWaitTime(), from_stop, "Wait"});
 
-        transport_router.AddWaitTimeEdge(to_vertex_pair.first, to_vertex_pair.second);
-        transport_router.AddRouteInfo(std::make_pair(to_vertex_pair.first, to_vertex_pair.second), Descriptions::Wait{transport_router.GetWaitTime(), to_stop, "Wait"});
+        transport_router->AddWaitTimeEdge(to_vertex_pair.first, to_vertex_pair.second);
+        transport_router->AddRouteInfo(std::make_pair(to_vertex_pair.first, to_vertex_pair.second), Descriptions::Wait{transport_router->GetWaitTime(), to_stop, "Wait"});
 
-        transport_router.AddRouteEdge(from_vertex_pair.second, to_vertex_pair.first, total_route_time);
-        transport_router.AddRouteInfo(std::make_pair(from_vertex_pair.second, to_vertex_pair.first),Descriptions::StopRoute{total_route_time, bus_id, span_count, "Bus"});
+        transport_router->AddRouteEdge(from_vertex_pair.second, to_vertex_pair.first, total_route_time);
+        transport_router->AddRouteInfo(std::make_pair(from_vertex_pair.second, to_vertex_pair.first),Descriptions::StopRoute{total_route_time, bus_id, span_count, "Bus"});
     }
 }
 
 
-void Database::ProcessBusRoute(
+void Database::ProcessSingleBusRoute(
     const std::string& bus_id, 
     const Descriptions::BusInformation& bus_info,
     bool is_forward) {
@@ -296,10 +296,10 @@ void Database::ProcessBusRoute(
 double Database::CalculateTimeBetweenStops(const std::string& from_stop, const std::string& to_stop) {
         if (stop_db.at(from_stop).neighbors.count(to_stop)) {
             int distance = stop_db.at(from_stop).neighbors.at(to_stop);
-            return DatabaseStats::ComputeTime(distance, transport_router.GetVelocity());
+            return DatabaseStats::ComputeTime(distance, transport_router->GetVelocity());
         } else {
             int distance = stop_db.at(to_stop).neighbors.at(from_stop);
-        return DatabaseStats::ComputeTime(distance, transport_router.GetVelocity());
+        return DatabaseStats::ComputeTime(distance, transport_router->GetVelocity());
     }
 }
 
@@ -323,9 +323,22 @@ void Database::RenderMap(){
                 break;
         }
     }
+}
 
+const std::optional<std::vector<Descriptions::RouteInfo>> Database::BuildRoute(const std::string& from, const std::string& to) const {
+    return transport_router->BuildRoute(from, to);
+}
 
-    
+const Svg::Document& Database::GetMap() const {
+    return map.GetMap();
+}
+
+void Database::SetRoutingSettings(const Json::Node& routing_settings_node) {
+    transport_router->SetRoutingSettings(routing_settings_node);
+}
+
+void Database::SetRenderSettings(const Json::Node& render_settings_node) {
+    map.SetRenderSettings(render_settings_node);
 }
 
 

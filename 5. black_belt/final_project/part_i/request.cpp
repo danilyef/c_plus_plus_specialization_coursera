@@ -168,7 +168,7 @@ Json::Node GetRouteRequest::CreateSuccessResponse(int request_id, Json::Node ite
 
 
 Json::Node GetRouteRequest::ProcessRead(const Database& db) const { 
-    const auto route = db.transport_router.BuildRoute(from, to);
+    const auto route = db.BuildRoute(from, to);
 
     if(route){
         const auto& [items, total_time] = ProcessRouteItems(route.value());
@@ -182,7 +182,7 @@ Json::Node GetRouteRequest::ProcessRead(const Database& db) const {
 GetMapRequest::GetMapRequest(): ReadRequest(Type::GET_MAP){};
 Json::Node GetMapRequest::ProcessRead(const Database& db) const {
     return Json::Node(std::map<std::string,Json::Node>{
-        {"map", Json::Node(db.map.GetMap().RenderToString())},
+        {"map", Json::Node(db.GetMap().RenderToString())},
         {"request_id", Json::Node(request_id)}
     });
 }
@@ -264,10 +264,10 @@ const Json::Node RequestManager::ProcessRequests(const std::vector<RequestHolder
 
 void RequestManager::ProcessRoutingSettings(Json::Document& doc , Database& db){
     const auto& routing_settings = doc.GetRoot().AsMap().at("routing_settings");
-    db.transport_router.SetRoutingSettings(routing_settings);
+    db.SetRoutingSettings(routing_settings);
 }
 
 void RequestManager::ProcessRenderSettings(Json::Document& doc , Database& db){
     const auto& render_settings = doc.GetRoot().AsMap().at("render_settings");
-    db.map.SetRenderSettings(render_settings);
+    db.SetRenderSettings(render_settings);
 }
