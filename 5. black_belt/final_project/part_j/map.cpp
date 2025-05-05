@@ -52,14 +52,6 @@ void Map::SetRenderSettings(const Json::Node& render_settings_node) {
     }
 }
 
-void Map::SetMaxCoordinates(const Descriptions::Coordinates& coordinates) {
-    render_settings.max_coordinates = coordinates;
-}
-
-void Map::SetMinCoordinates(const Descriptions::Coordinates& coordinates) {
-    render_settings.min_coordinates = coordinates;
-}
-
 void Map::SetStepX(const StopDatabase& stop_db) {
     if (stop_db.size() == 1) {
         render_settings.step_x = 0.0;

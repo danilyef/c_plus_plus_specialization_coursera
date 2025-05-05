@@ -87,8 +87,6 @@ struct RenderSettings{
     Svg::Color underlayer_color;
     double underlayer_width;
     std::vector<Svg::Color> color_palette;
-    Descriptions::Coordinates min_coordinates;
-    Descriptions::Coordinates max_coordinates;
     int bus_label_font_size;
     Svg::Point bus_label_offset;
     std::vector<Layer> layers;

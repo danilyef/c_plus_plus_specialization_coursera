@@ -176,21 +176,7 @@ void Database::UpdateStopStats(){
 };
 
 
-void Database::UpdateMappingCoordinates(){
-    double max_lon = std::numeric_limits<double>::min();
-    double min_lon = std::numeric_limits<double>::max();
-    double max_lat = std::numeric_limits<double>::min();
-    double min_lat = std::numeric_limits<double>::max();
 
-    for(const auto& [stop_name, stop_info] : stop_db){
-       max_lon = std::max(max_lon, stop_info.coordinates.longitude);
-       min_lon = std::min(min_lon, stop_info.coordinates.longitude);
-       max_lat = std::max(max_lat, stop_info.coordinates.latitude);
-       min_lat = std::min(min_lat, stop_info.coordinates.latitude);
-    }
-    map.SetMaxCoordinates(Descriptions::Coordinates{max_lat, max_lon});
-    map.SetMinCoordinates(Descriptions::Coordinates{min_lat, min_lon});
-}
 
 
 
@@ -198,7 +184,6 @@ void Database::UpdateMappingCoordinates(){
 void Database::UpdateDatabase(){
     UpdateBusStats();
     UpdateStopStats();
-    UpdateMappingCoordinates();
     BuildGraph();
 };
 

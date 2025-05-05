@@ -67,7 +67,6 @@ private:
     /*Stats*/
     void UpdateBusStats();
     void UpdateStopStats();
-    void UpdateMappingCoordinates();
 
     /*Functions related to graph building*/
     void BuildGraph();

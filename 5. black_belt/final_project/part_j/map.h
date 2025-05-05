@@ -18,8 +18,6 @@ public:
     using StopDatabase = std::map<std::string, Descriptions::StopInformation>;
 
     void SetRenderSettings(const Json::Node& render_settings_node);
-    void SetMinCoordinates(const Descriptions::Coordinates& coordinates);
-    void SetMaxCoordinates(const Descriptions::Coordinates& coordinates);
 
     void CreateCoordinatesMapping(StopDatabase& stop_db);
 
