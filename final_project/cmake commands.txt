@@ -1,0 +1,20 @@
+1. Configure project:
+
+cmake --preset default
+cmake --preset default -Dprotobuf_MODULE_COMPATIBLE:BOOL=ON
+
+2. Build Project:
+
+# For debug build (recommended during development)
+cmake --build --preset debug
+
+# OR for release build
+cmake --build --preset release
+
+3. Run Project:
+
+# For debug build
+cd build && ./main
+cd build && ./main < ../src/test_json/input_m_1.json
+
+./build/main < src/test_json/input_m_1.json
